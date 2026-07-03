@@ -1,0 +1,113 @@
+{
+  "_meta": {
+    "title": "Working analysis: Senior-care walk-in tubs LP at 21% baseline",
+    "industry": "senior_care",
+    "page_archetype": "lead_capture",
+    "baseline_conversion_pct": 21.3,
+    "why_strong_example": "Demonstrates preservation thinking on a high-converting page: identifies that the trust anatomy (BBB + license # + 'since 2007' + real installer photo + phone above fold) is doing ~55% of conversion load and warns aggressively against any test that touches it.",
+    "uses_frameworks": ["lift_model_reverse", "trust_anatomy", "page_archetype_patterns"]
+  },
+  "input_summary": {
+    "url": "https://homeiq.io/walkintubs (example)",
+    "baseline_conversion_pct": 21.3,
+    "monthly_traffic": 12000,
+    "page_archetype": "lead_capture",
+    "primary_metric": "zip_submit_rate",
+    "form_fields": ["zip", "name", "email", "phone"]
+  },
+  "analysis": {
+    "baseline_assessment": "works",
+    "lift_scoring": {
+      "value_proposition": 5,
+      "relevance": 5,
+      "clarity": 4,
+      "anxiety_management": 5,
+      "distraction": 4,
+      "urgency": 3
+    },
+    "trust_anatomy": [
+      {
+        "element": "Phone number above fold (mobile click-to-call)",
+        "estimated_load_pct": 18,
+        "why_working": "Senior audience defaults to phone confidence; visible click-to-call removes a step"
+      },
+      {
+        "element": "BBB A+ badge near hero",
+        "estimated_load_pct": 15,
+        "why_working": "Cold-traffic audience needs immediate institutional trust; BBB is the universal senior-recognized signal"
+      },
+      {
+        "element": "'4,500+ Florida seniors served since 2007'",
+        "estimated_load_pct": 10,
+        "why_working": "Specific number + specific geography + longevity. Three multipliers in one line."
+      },
+      {
+        "element": "'No high-pressure sales' explicit language",
+        "estimated_load_pct": 7,
+        "why_working": "Overcomes the senior-services-call-center objection that's been burned into this audience"
+      },
+      {
+        "element": "Real installer photo with name + 'licensed FL contractor #...' caption",
+        "estimated_load_pct": 5,
+        "why_working": "Personal connection + regulatory credibility in single element"
+      }
+    ],
+    "preservation_zones": [
+      {
+        "element": "phone_number_above_fold",
+        "reason": "18% load share; senior audience phone-first preference; mobile click-to-call removes a step"
+      },
+      {
+        "element": "trust_badge_row (BBB + license)",
+        "reason": "Combined ~25% load share; cold-traffic regulated industry"
+      },
+      {
+        "element": "specific_longevity_line",
+        "reason": "10% load; specificity premium ('4,500 Florida seniors since 2007')"
+      },
+      {
+        "element": "no_pressure_sales_language",
+        "reason": "7% load; explicit objection-handler"
+      },
+      {
+        "element": "real_installer_photo_with_caption",
+        "reason": "5% load; combined trust mechanism (personal + regulatory)"
+      },
+      {
+        "element": "form_field_count_4",
+        "reason": "Operator's lead-quality is reportedly high; form is filtering not just collecting"
+      }
+    ],
+    "change_safe_zones": [
+      {
+        "element": "hero_subheadline",
+        "reason": "Below-headline copy can be tested; less load-bearing than headline + trust stack"
+      },
+      {
+        "element": "below_fold_benefits_list_order",
+        "reason": "Reordering is a safe test; total content unchanged"
+      },
+      {
+        "element": "secondary_imagery",
+        "reason": "Non-hero imagery is decorative not load-bearing"
+      },
+      {
+        "element": "footer_links",
+        "reason": "Below the line; minor conversion contribution"
+      },
+      {
+        "element": "submit_button_copy_micro_variations",
+        "reason": "Specific value-prop copy works; minor variations test-safe (e.g. 'Get My Free Assessment' vs 'See If We Serve Your Area')"
+      }
+    ],
+    "warnings_for_downstream": [
+      "DO NOT propose hero_headline rewrite. Hero matches awareness-stage + audience identity. Estimated load: ~20-25%.",
+      "DO NOT propose form-field reduction without lead-quality evidence. Operator runs 4 fields; reportedly filtering effectively.",
+      "DO NOT propose removing or hiding the phone number, even for 'cleaner mobile'. 18% trust-load on this audience.",
+      "DO NOT propose replacing real installer photos with stock or illustration. 5% load + audience trust signal.",
+      "Tests that ADD trust mechanisms (more case-study-style testimonials, more press logos) are LOWER risk than tests that remove existing ones.",
+      "Mobile baseline conversion is unknown — operator should provide viewport-specific data for higher-confidence preservation analysis."
+    ],
+    "confidence": 0.85
+  }
+}

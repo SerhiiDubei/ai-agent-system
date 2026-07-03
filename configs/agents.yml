@@ -1,0 +1,101 @@
+quality_tier: economy
+tiers:
+  economy:
+    default_model: openai/gpt-4o-mini
+    default_fallbacks:
+    - openai/gpt-4o
+    overrides: {}
+  balanced:
+    default_model: openai/gpt-4o-mini
+    default_fallbacks:
+    - openai/gpt-4o
+    overrides:
+      customer_insights:
+        model: anthropic/claude-sonnet-4.6
+        fallbacks:
+        - openai/gpt-4o
+      voice_message:
+        model: anthropic/claude-sonnet-4.6
+        fallbacks:
+        - openai/gpt-4o
+  premium:
+    default_model: anthropic/claude-sonnet-4.6
+    default_fallbacks:
+    - openai/gpt-4o
+    - openai/gpt-4o-mini
+    overrides: {}
+defaults:
+  temperature: 0.3
+  max_tokens: 8192
+  timeout_s: 120
+  retries: 1
+  retry_on:
+  - ValidationError
+  - RateLimitError
+  - APITimeoutError
+  retry_backoff_factor: 2.0
+  log_full_payload: true
+cost_limits:
+  per_run_max_usd: 0.5
+  per_agent_max_usd: 0.2
+  daily_total_max_usd: 25.0
+  warn_at_pct: 0.75
+prompt_versions:
+  customer_insights: v1
+  voice_message: v1
+  media_planner: v1
+  audience_strategist: v1
+  conversion_architect: v1
+  hypothesis_generator: v1
+  hypothesis_judge: v1
+  page_works_analyzer: v1
+  product_director: v1
+agents:
+  customer_insights:
+    temperature: 0.4
+    max_tokens: 6144
+  voice_message:
+    temperature: 0.5
+    max_tokens: 4096
+  media_planner:
+    temperature: 0.2
+    max_tokens: 4096
+  audience_strategist:
+    temperature: 0.3
+    max_tokens: 4096
+  conversion_architect:
+    temperature: 0.3
+    max_tokens: 4096
+  hypothesis_generator:
+    temperature: 0.4
+    max_tokens: 8192
+    # Hypothesis schema is deeply nested (3-6 plans × 2-4 variants × 14 fields each).
+    # gpt-4o-mini chokes on this scale; gpt-4o sometimes succeeds; sonnet-4.6 reliable.
+    model_override: anthropic/claude-sonnet-4.6
+    fallbacks_override:
+      - openai/gpt-4o
+      - openai/gpt-4o-mini
+
+  hypothesis_judge:
+    temperature: 0.1               # judge wants deterministic, repeatable verdicts
+    max_tokens: 6144
+    # Judge is pattern matching, not creative production — gpt-4o-mini is fine.
+    # Tier-controlled by default; override only if quality issues emerge.
+
+  page_works_analyzer:
+    temperature: 0.2               # analytical role — deterministic > creative
+    max_tokens: 6144
+    # Page-Works Analyzer needs structured output reasoning. gpt-4o-mini handles
+    # well; sonnet override if quality on complex pages becomes a concern.
+
+  product_director:
+    temperature: 0.2               # decision-maker — repeatable, defensible verdicts
+    max_tokens: 6144
+    # Product Director synthesizes ALL expert input. Mid-complexity output.
+  drafter_legacy:
+    temperature: 0.3
+    max_tokens: 8192
+  marketing_judge:
+    temperature: 0.0
+    max_tokens: 2048
+    model_override: openai/gpt-4o-mini

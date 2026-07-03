@@ -1,0 +1,104 @@
+{
+  "_meta": {
+    "title": "Working analysis: B2B dev-tool LP at 4.2% baseline (demo request)",
+    "industry": "b2b_saas",
+    "page_archetype": "lead_capture",
+    "baseline_conversion_pct": 4.2,
+    "why_strong_example": "B2B SaaS analysis showing how 4.2% can be EXCELLENT for the niche; identifies that customer logo wall (in-ICP) and product screenshot are doing the heavy lift; warns against logo wall removal (a common 'modernization' move).",
+    "uses_frameworks": ["lift_model_reverse", "trust_anatomy", "page_archetype_patterns"]
+  },
+  "input_summary": {
+    "url": "Linear-style dev tool LP",
+    "baseline_conversion_pct": 4.2,
+    "monthly_traffic": 80000,
+    "page_archetype": "lead_capture",
+    "primary_metric": "demo_booking_rate",
+    "form_fields": ["work_email", "company", "role", "team_size"]
+  },
+  "analysis": {
+    "baseline_assessment": "works",
+    "lift_scoring": {
+      "value_proposition": 5,
+      "relevance": 5,
+      "clarity": 4,
+      "anxiety_management": 4,
+      "distraction": 3,
+      "urgency": 2
+    },
+    "trust_anatomy": [
+      {
+        "element": "Customer logo wall (Vercel, Ramp, Coinbase, etc.)",
+        "estimated_load_pct": 22,
+        "why_working": "ICP-recognized peer companies = social-proof shortcut. Visitor sees own peer-tier and assumes safe choice."
+      },
+      {
+        "element": "Product screenshot/animation in hero",
+        "estimated_load_pct": 20,
+        "why_working": "B2B SaaS conversion driver — show the product, not abstract benefit copy. Animation > static."
+      },
+      {
+        "element": "Specific case-study quote with first name + role + metric",
+        "estimated_load_pct": 12,
+        "why_working": "'Chintan, Head of Eng at Coinbase: shipped 2x faster' beats 'companies report higher productivity'"
+      },
+      {
+        "element": "SOC 2 Type II badge in footer + Trust Center link",
+        "estimated_load_pct": 8,
+        "why_working": "Procurement/IT gate; visible compliance reduces the deal-killer at $25K+ ACV"
+      },
+      {
+        "element": "G2 Leader badge",
+        "estimated_load_pct": 5,
+        "why_working": "Third-party authority; specifically the 'Leader' quadrant matters"
+      }
+    ],
+    "preservation_zones": [
+      {
+        "element": "customer_logo_wall",
+        "reason": "22% load. Removing for 'cleaner minimal' has destroyed B2B LPs in published case studies."
+      },
+      {
+        "element": "hero_product_screenshot_or_animation",
+        "reason": "20% load. The product IS the conversion driver in B2B SaaS."
+      },
+      {
+        "element": "specific_case_study_quote",
+        "reason": "12% load. Specific name + role + metric > generic testimonial."
+      },
+      {
+        "element": "soc2_trust_center_visibility",
+        "reason": "8% load. Procurement/IT gate; visible compliance is a deal floor."
+      },
+      {
+        "element": "demo_form_4_fields",
+        "reason": "Sales-led B2B; 4 fields qualify the lead. Reducing to 2 fields would flood sales with low-quality leads."
+      }
+    ],
+    "change_safe_zones": [
+      {
+        "element": "below_fold_feature_explainer_copy",
+        "reason": "Tertiary content; copy variants safe to test"
+      },
+      {
+        "element": "secondary_cta_copy",
+        "reason": "'Watch demo video' / 'Read docs' microcopy variants are low-risk"
+      },
+      {
+        "element": "logo_wall_ORDER",
+        "reason": "Re-ordering logos to highlight visitor-segment-relevant brands is a clean test (A/B by company size or industry)"
+      },
+      {
+        "element": "product_screenshot_VARIANTS",
+        "reason": "Different feature highlighted in screenshot — test which feature drives best demo CVR"
+      }
+    ],
+    "warnings_for_downstream": [
+      "DO NOT propose customer logo wall removal. 22% load. This is the classic 'modernize' destruction pattern.",
+      "DO NOT propose replacing product screenshot with abstract illustration. 20% load.",
+      "DO NOT propose reducing demo-form below 4 fields without lead-quality evidence. Sales team will revolt + LP becomes a low-intent lead pump.",
+      "DO NOT propose adding urgency mechanisms ('limited demo slots'). Falsely manufactured urgency erodes B2B trust catastrophically.",
+      "Tests on the BELOW-FOLD copy and on SCREENSHOT VARIANTS are the highest-leverage low-risk test surface here."
+    ],
+    "confidence": 0.88
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "_meta": {
+    "title": "Working analysis: Debt-relief LP at 14.7% form-fill baseline",
+    "industry": "financial_services",
+    "page_archetype": "lead_capture",
+    "baseline_conversion_pct": 14.7,
+    "why_strong_example": "Demonstrates preservation in identity-sensitive vertical: identifies the 'no upfront fees' line and the calculator widget as load-bearing; warns specifically against changing the calculator UX without strong evidence.",
+    "uses_frameworks": ["lift_model_reverse", "trust_anatomy", "page_archetype_patterns"]
+  },
+  "input_summary": {
+    "url": "Debt-relief LP example",
+    "baseline_conversion_pct": 14.7,
+    "monthly_traffic": 35000,
+    "page_archetype": "lead_capture",
+    "primary_metric": "qualified_form_fill_rate",
+    "form_fields": ["debt_amount", "zip", "phone", "email"]
+  },
+  "analysis": {
+    "baseline_assessment": "works",
+    "lift_scoring": {
+      "value_proposition": 4,
+      "relevance": 5,
+      "clarity": 4,
+      "anxiety_management": 5,
+      "distraction": 3,
+      "urgency": 2
+    },
+    "trust_anatomy": [
+      {
+        "element": "Interactive savings calculator (input debt → see monthly savings)",
+        "estimated_load_pct": 18,
+        "why_working": "Engagement → commitment ladder; visitor sees specific personal outcome before form"
+      },
+      {
+        "element": "BBB A+ badge + AFCC accreditation",
+        "estimated_load_pct": 15,
+        "why_working": "Cold-traffic identity-sensitive audience needs institutional credibility; AFCC specifically signals industry self-regulation"
+      },
+      {
+        "element": "'No upfront fees' explicit (FTC-mandated for debt relief)",
+        "estimated_load_pct": 12,
+        "why_working": "Overcomes the 'sketchy debt-relief outfit' ghost that haunts every conversation"
+      },
+      {
+        "element": "'Established 2009 — helped 100,000+ Americans'",
+        "estimated_load_pct": 10,
+        "why_working": "Longevity + specific scale; calibrates trust on a vertical with high prior-bad-actor exposure"
+      },
+      {
+        "element": "Trustpilot 4.6 with 8,400+ reviews displayed",
+        "estimated_load_pct": 8,
+        "why_working": "Volume of reviews matters more than score; signals ongoing operations + audience size"
+      }
+    ],
+    "preservation_zones": [
+      {
+        "element": "calculator_widget",
+        "reason": "18% load. Calculator is the primary engagement-to-commitment ladder. Removing it has tanked debt-relief LPs in published case studies."
+      },
+      {
+        "element": "no_upfront_fees_language",
+        "reason": "12% load. Specific objection-handler. 'Transparent pricing' is NOT an equivalent replacement."
+      },
+      {
+        "element": "bbb_afcc_accreditation_visibility",
+        "reason": "Combined 15% load. Industry self-regulation badge especially important after the prior bad actors."
+      },
+      {
+        "element": "trustpilot_count_AND_score",
+        "reason": "8% load. Hiding count for 'cleaner display' loses the volume signal."
+      },
+      {
+        "element": "longevity_year_specific_count",
+        "reason": "10% load. Don't generalize to 'helped many'; the specific number is the credibility."
+      },
+      {
+        "element": "soft_commitment_language_no_credit_pull",
+        "reason": "Implicit but high-load: 'no credit pull' / 'free consultation' lowers perceived risk pre-form. Removing → -20%+ form starts."
+      }
+    ],
+    "change_safe_zones": [
+      {
+        "element": "calculator_INPUT_field_count",
+        "reason": "Test 1-input vs 2-input calculator (debt amount alone vs debt + monthly payment). Calculator presence preserved."
+      },
+      {
+        "element": "calculator_OUTPUT_copy",
+        "reason": "How the savings result is described: 'You could save $X/mo' vs 'Get out of debt in N years for $X/mo' — testable."
+      },
+      {
+        "element": "below_fold_faq_content",
+        "reason": "FAQ ordering and additions are change-safe."
+      },
+      {
+        "element": "press_logo_selection",
+        "reason": "Which press logos shown ('Forbes', 'NerdWallet', etc.) — test highest-recognition set."
+      }
+    ],
+    "warnings_for_downstream": [
+      "DO NOT propose calculator removal under any circumstances. 18% load on engagement → conversion ladder.",
+      "DO NOT replace 'no upfront fees' with paraphrases like 'transparent pricing' or 'fair fees'. Specific phrase is a known objection-handler.",
+      "DO NOT propose removing soft-commitment language ('no credit pull', 'free consultation'). Hard-commitment ('apply now') reduces form starts ~20%+ in this vertical.",
+      "DO NOT add aggressive urgency ('Limited spots — this offer expires!'). Identity-sensitive audience reads urgency as scam signal.",
+      "Tests on calculator INPUT/OUTPUT copy variants are the highest-leverage low-risk surface.",
+      "Tests on below-fold FAQ and press-logo selection are also low-risk."
+    ],
+    "confidence": 0.86
+  }
+}

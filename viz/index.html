@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Agent System — Architecture Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0f172a; color: #e2e8f0;
+    font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    padding: 32px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 28px; margin-bottom: 8px; color: #f1f5f9; }
+  h2 { font-size: 20px; margin: 32px 0 12px; color: #f8fafc; }
+  h3 { font-size: 15px; color: #f1f5f9; }
+  code {
+    background: #1e293b; padding: 2px 6px; border-radius: 3px;
+    font-family: "SF Mono", Consolas, Monaco, monospace; font-size: 12px;
+    color: #93c5fd;
+  }
+
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid #334155; padding-bottom: 16px; margin-bottom: 24px;
+  }
+  .header .meta { color: #94a3b8; font-size: 12px; }
+
+  .stats {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+    margin: 24px 0;
+  }
+  .stat {
+    background: #1e293b; border-radius: 8px; padding: 16px;
+    border: 1px solid #334155;
+  }
+  .stat .num { font-size: 28px; font-weight: bold; color: #f1f5f9; }
+  .stat .lbl { font-size: 12px; color: #94a3b8; text-transform: uppercase; }
+  .stat.ok .num   { color: #10b981; }
+  .stat.warn .num { color: #f59e0b; }
+  .stat.todo .num { color: #6b7280; }
+
+  .mermaid-wrap {
+    background: #1e293b; border-radius: 8px; padding: 24px; margin: 24px 0;
+    overflow-x: auto; border: 1px solid #334155;
+  }
+  .mermaid { display: flex; justify-content: center; }
+
+  .phase-timeline {
+    list-style: none; display: flex; gap: 8px; flex-wrap: wrap;
+    background: #1e293b; padding: 16px; border-radius: 8px;
+    border: 1px solid #334155;
+  }
+  .phase-timeline li {
+    display: flex; align-items: center; gap: 6px;
+    padding: 8px 12px; background: #0f172a; border-radius: 6px;
+    border: 1px solid #334155;
+  }
+  .phase-done .marker { color: #10b981; font-weight: bold; }
+  .phase-done .phase-name { color: #e2e8f0; }
+  .phase-pending .marker { color: #6b7280; }
+  .phase-pending .phase-name { color: #94a3b8; }
+  .phase-num { font-size: 11px; color: #64748b; }
+
+  .layer-title { color: #93c5fd; }
+  .cards-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 12px;
+  }
+  .node-card {
+    background: #1e293b; border-radius: 8px; padding: 16px;
+    border: 1px solid #334155;
+    transition: transform 0.1s, border-color 0.1s;
+  }
+  .node-card:hover { transform: translateY(-2px); border-color: #475569; }
+  .node-card[data-status="todo"] { opacity: 0.6; border-style: dashed; }
+
+  .node-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+  }
+  .status-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .node-id {
+    font-family: monospace; background: #0f172a; padding: 2px 6px;
+    border-radius: 3px; font-size: 11px; color: #94a3b8;
+  }
+  .node-header h3 { flex: 1; margin: 0; }
+  .score {
+    background: #0f172a; padding: 2px 8px; border-radius: 12px;
+    font-size: 11px; color: #cbd5e1; font-weight: bold;
+  }
+
+  .role { color: #cbd5e1; font-size: 13px; margin-bottom: 8px; }
+  .badges { margin-bottom: 8px; }
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 10px; text-transform: uppercase; font-weight: bold;
+    margin-right: 4px;
+  }
+  .badge-page { background: #0e7490; color: #fff; }
+  .badge-premium { background: #7c3aed; color: #fff; }
+  .badge-economy { background: #475569; color: #cbd5e1; }
+
+  .files { list-style: none; font-size: 11px; color: #94a3b8; }
+  .files li { margin: 2px 0; }
+  .files code { font-size: 11px; }
+
+  .char-card-info {
+    margin-top: 12px; padding-top: 12px; border-top: 1px solid #334155;
+    font-size: 12px;
+  }
+  .word-count { color: #64748b; margin-left: 8px; font-size: 11px; }
+  .who-excerpt {
+    color: #cbd5e1; margin-top: 6px; padding: 8px;
+    background: #0f172a; border-radius: 4px; font-style: italic;
+    font-size: 11px; line-height: 1.4;
+  }
+  details summary {
+    cursor: pointer; color: #93c5fd; font-size: 11px; margin-top: 4px;
+  }
+
+  .run-summary {
+    background: #1e293b; padding: 16px; border-radius: 8px;
+    border: 1px solid #334155;
+  }
+  .run-summary p { margin: 4px 0; font-size: 13px; }
+  .agents-table {
+    width: 100%; margin-top: 12px; border-collapse: collapse; font-size: 12px;
+  }
+  .agents-table th, .agents-table td {
+    padding: 6px 8px; text-align: left; border-bottom: 1px solid #334155;
+  }
+  .agents-table th { color: #94a3b8; font-weight: normal; font-size: 11px; }
+  .agents-table tr.fail { color: #fca5a5; }
+  .agents-table tr.ok td:first-child { color: #10b981; }
+
+  .empty { color: #64748b; font-style: italic; padding: 24px; text-align: center; }
+
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>AI Agent System — Architecture Dashboard</h1>
+    <div class="meta">A/B test hypothesis generator for paid-traffic landing pages</div>
+  </div>
+  <div class="meta">Generated 2026-04-28 18:10:36</div>
+</div>
+
+<div class="stats">
+  <div class="stat ok"><div class="num">20</div><div class="lbl">Complete</div></div>
+  <div class="stat warn"><div class="num">1</div><div class="lbl">Partial</div></div>
+  <div class="stat todo"><div class="num">2</div><div class="lbl">Not built</div></div>
+  <div class="stat"><div class="num">79</div><div class="lbl">Avg Score</div></div>
+  <div class="stat"><div class="num">23</div><div class="lbl">Total Nodes</div></div>
+</div>
+
+<h2>Phase Progress</h2>
+<ul class="phase-timeline"><li class="phase-done"><span class="marker">✓</span><span class="phase-num">Phase 0</span><span class="phase-name">Observability infra</span></li><li class="phase-done"><span class="marker">✓</span><span class="phase-num">Phase 1</span><span class="phase-name">Drafter decomposition (5 agents)</span></li><li class="phase-done"><span class="marker">✓</span><span class="phase-num">Phase 2</span><span class="phase-name">Snapshot → Marketing connection</span></li><li class="phase-done"><span class="marker">✓</span><span class="phase-num">Phase 3</span><span class="phase-name">Hypothesis Generator</span></li><li class="phase-done"><span class="marker">✓</span><span class="phase-num">Phase 4</span><span class="phase-name">Hypothesis Judge</span></li><li class="phase-done"><span class="marker">✓</span><span class="phase-num">Phase 5b</span><span class="phase-name">CI v2 agent-as-system</span></li><li class="phase-done"><span class="marker">✓</span><span class="phase-num">Phase 5d</span><span class="phase-name">Operating constraints + test depth + MDE</span></li><li class="phase-done"><span class="marker">✓</span><span class="phase-num">Phase 5f</span><span class="phase-name">Page-Works Analyzer (preservation)</span></li><li class="phase-done"><span class="marker">✓</span><span class="phase-num">Phase 5g</span><span class="phase-name">Persistent expert state</span></li><li class="phase-done"><span class="marker">✓</span><span class="phase-num">Phase 5h</span><span class="phase-name">Product Director (synthesizer)</span></li><li class="phase-pending"><span class="marker">○</span><span class="phase-num">Phase 5c</span><span class="phase-name">Full agent-as-system rollout</span></li><li class="phase-pending"><span class="marker">○</span><span class="phase-num">Phase 5j+</span><span class="phase-name">Daily auto-enrichment (vision)</span></li><li class="phase-pending"><span class="marker">○</span><span class="phase-num">Phase 6</span><span class="phase-name">Test Platform Integration</span></li><li class="phase-pending"><span class="marker">○</span><span class="phase-num">Phase 7</span><span class="phase-name">Results Tracker + Dashboard</span></li></ul>
+
+<h2>System Architecture (data flow)</h2>
+<div class="mermaid-wrap">
+  <pre class="mermaid">
+graph TB
+    BRIEF[/&quot;Brief + Constraints + URL&quot;/]:::input
+    BRIEF --> N1[N1 Snapshot]:::pipeline
+    BRIEF --> N3[N3 Knowledge RAG]:::pipeline
+    N1 --> N2[N2 Semantic Parser]:::pipeline
+    N1 --> PC{{Page Context}}:::data
+    N2 --> PC
+
+    PC --> PW[PW Page-Works Analyzer]:::agent_v2
+    BRIEF --> PW
+    PW --> PRESV{{Preservation Map<br/>+ Warnings}}:::data
+
+    subgraph Drafter [N4 Decomposed Drafter — 5 agents]
+      direction TB
+      CI[Customer Insights v2]:::agent_v2
+      MP[Media Planner]:::agent_complete
+      CA[Conversion Architect]:::agent_page
+      VM[Voice and Message]:::agent_page
+      AS[Audience Strategist]:::agent_complete
+      ASM([Assembler]):::agent_complete
+      CI --> VM
+      CI --> AS
+      MP --> AS
+      CI --> ASM
+      VM --> ASM
+      MP --> ASM
+      AS --> ASM
+      CA --> ASM
+    end
+
+    BRIEF --> CI
+    BRIEF --> MP
+    BRIEF --> CA
+    N3 -.RAG chunks.-> CI
+    PC -.page data.-> CA
+    PC -.page data.-> VM
+    PRESV -.warnings.-> CI
+    PRESV -.warnings.-> CA
+    PRESV -.warnings.-> VM
+
+    ASM --> HG[N6 Hypothesis Generator]:::agent_premium
+    PC -.page data.-> HG
+    PRESV -.warnings.-> HG
+    HG --> HJ[N7 Hypothesis Judge]:::agent_complete
+    HJ --> PD[PD Product Director]:::agent_v2
+    PRESV -.preserve.-> PD
+    BRIEF -.constraints.-> PD
+    PD --> DEC{{Ship/Iterate/Kill<br/>Decision Package}}:::data
+    DEC --> TP[N8 Test Platform]:::todo
+    TP --> RT[N9 Results Tracker]:::todo
+
+    classDef input fill:#1e293b,stroke:#94a3b8,color:#fff
+    classDef pipeline fill:#065f46,stroke:#10b981,color:#fff
+    classDef data fill:#1e3a8a,stroke:#3b82f6,color:#fff
+    classDef agent_complete fill:#10b981,stroke:#059669,color:#fff
+    classDef agent_page fill:#0891b2,stroke:#0e7490,color:#fff
+    classDef agent_premium fill:#7c3aed,stroke:#5b21b6,color:#fff
+    classDef agent_v2 fill:#db2777,stroke:#9d174d,color:#fff,stroke-width:2px
+    classDef todo fill:#374151,stroke:#6b7280,color:#9ca3af,stroke-dasharray: 5 5
+  </pre>
+</div>
+
+<h2>Latest Pipeline Run</h2>
+
+    <div class="run-summary">
+      <p><strong>Run ID:</strong> <code>23c843f6e9b6</code></p>
+      <p><strong>Label:</strong> v3_multi_saas_workflow</p>
+      <p><strong>Started:</strong> 2026-04-28T15:06:01.898312+00:00</p>
+      <p><strong>Total cost:</strong> $0.1308</p>
+      <p><strong>LLM calls:</strong> 7</p>
+      <p><strong>Log file:</strong> <code>logs\agent_runs\2026-04-28\23c843f6e9b6.jsonl</code></p>
+      <p><strong>Inspect command:</strong>
+        <code>python scripts/inspect_run.py 23c843f6e9b6 --full</code>
+      </p>
+      <h3>Agents in this run</h3>
+      <table class="agents-table">
+        <thead><tr><th></th><th>Agent</th><th>Latency</th><th>Cost</th><th>Output</th></tr></thead>
+        <tbody><tr class="ok"><td>✓</td><td><code>page_works_analyzer</code></td><td>24,375 ms</td><td>$0.0405</td><td>baseline=works trust_mechanisms=5 preserve=4 safe=4 warnings=5 confidence=0.60</td></tr><tr class="ok"><td>✓</td><td><code>media_planner</code></td><td>4,500 ms</td><td>$0.0005</td><td>channel=google_search temp=hot</td></tr><tr class="ok"><td>✓</td><td><code>conversion_architect</code></td><td>32,047 ms</td><td>$0.0013</td><td>5 stages, 5 tests, top ICE=23</td></tr><tr class="ok"><td>✓</td><td><code>customer_insights_v2</code></td><td>50,687 ms</td><td>$0.0575</td><td>3 personas, 3 aggregate pains (routing: niche_exact/b2b_saas)</td></tr><tr class="ok"><td>✓</td><td><code>audience_strategist</code></td><td>9,764 ms</td><td>$0.0006</td><td>primary=&#x27;Efficiency-Driven Ethan, Head of Engineering, Scaling Challenges&#x27;, 3 seeds, 3 exclusions</td></tr><tr class="ok"><td>✓</td><td><code>voice_message</code></td><td>14,280 ms</td><td>$0.0007</td><td>5 hooks, 5 angles, value_prop=&#x27;I help engineering teams streamline project tracking without&#x27;</td></tr><tr class="ok"><td>✓</td><td><code>hypothesis_generator</code></td><td>173,812 ms</td><td>$0.1794</td><td>4 plans, top ICE=22, 3 deferred</td></tr></tbody>
+      </table>
+    </div>
+    
+
+<section class="layer-section"><h2 class="layer-title">Foundation</h2><div class="cards-grid">
+    <div class="node-card" data-status="complete" data-layer="foundation">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">F1</span>
+        <h3>Config</h3>
+        <span class="score" title="Quality score 0-100">85</span>
+      </div>
+      <p class="role">Centralized settings via Pydantic</p>
+      <div class="badges"></div>
+      <ul class="files"><li><code>src/ai_agent_system/config.py</code></li></ul>
+      
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="foundation">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">F2</span>
+        <h3>Auth</h3>
+        <span class="score" title="Quality score 0-100">65</span>
+      </div>
+      <p class="role">Internal API key auth</p>
+      <div class="badges"></div>
+      <ul class="files"><li><code>src/ai_agent_system/auth.py</code></li></ul>
+      
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="foundation">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">F3</span>
+        <h3>DB Layer</h3>
+        <span class="score" title="Quality score 0-100">80</span>
+      </div>
+      <p class="role">SQLAlchemy + Alembic + Postgres</p>
+      <div class="badges"></div>
+      <ul class="files"><li><code>src/ai_agent_system/db/</code></li></ul>
+      
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="foundation">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">F4</span>
+        <h3>API Gateway</h3>
+        <span class="score" title="Quality score 0-100">75</span>
+      </div>
+      <p class="role">FastAPI routers per module</p>
+      <div class="badges"></div>
+      <ul class="files"><li><code>src/ai_agent_system/api/</code></li><li><code>src/ai_agent_system/main.py</code></li></ul>
+      
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="foundation">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">F5</span>
+        <h3>LLM Router</h3>
+        <span class="score" title="Quality score 0-100">75</span>
+      </div>
+      <p class="role">OpenRouter gateway + cost sink + kill switch + tracing</p>
+      <div class="badges"></div>
+      <ul class="files"><li><code>src/ai_agent_system/llm/</code></li></ul>
+      
+    </div>
+    </div></section><section class="layer-section"><h2 class="layer-title">Pipeline</h2><div class="cards-grid">
+    <div class="node-card" data-status="complete" data-layer="pipeline">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">N1</span>
+        <h3>Snapshot</h3>
+        <span class="score" title="Quality score 0-100">80</span>
+      </div>
+      <p class="role">Firecrawl page capture (HTML+screenshots+markdown)</p>
+      <div class="badges"></div>
+      <ul class="files"><li><code>src/ai_agent_system/snapshot/</code></li></ul>
+      
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="pipeline">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">N2</span>
+        <h3>Semantic Parser</h3>
+        <span class="score" title="Quality score 0-100">70</span>
+      </div>
+      <p class="role">DOM mark extraction + element classification</p>
+      <div class="badges"></div>
+      <ul class="files"><li><code>src/ai_agent_system/semantic/</code></li></ul>
+      
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="pipeline">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">N3</span>
+        <h3>Knowledge RAG</h3>
+        <span class="score" title="Quality score 0-100">85</span>
+      </div>
+      <p class="role">Chunker, embedder, retriever, reranker, watcher</p>
+      <div class="badges"></div>
+      <ul class="files"><li><code>src/ai_agent_system/knowledge/</code></li></ul>
+      
+    </div>
+    </div></section><section class="layer-section"><h2 class="layer-title">Agents</h2><div class="cards-grid">
+    <div class="node-card" data-status="complete" data-layer="agents">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">PW</span>
+        <h3>Page-Works Analyzer (Preservation)</h3>
+        <span class="score" title="Quality score 0-100">88</span>
+      </div>
+      <p class="role">Domain-agnostic &#x27;preservation archaeologist&#x27; — analyzes existing LP, identifies trust anatomy + load-shares + preservation_zones + warnings_for_downstream. Runs FIRST in pipeline (Wave 0).</p>
+      <div class="badges"><span class="badge badge-page">page-aware</span><span class="badge badge-economy">tier-controlled</span></div>
+      <ul class="files"><li><code>agents/page_works_analyzer/AGENT.md</code></li><li><code>agents/page_works_analyzer/beliefs.md</code></li><li><code>agents/page_works_analyzer/workflow.md</code></li><li><code>agents/page_works_analyzer/anti_patterns.md</code></li><li><code>agents/page_works_analyzer/knowledge/frameworks/*.md (3)</code></li><li><code>agents/page_works_analyzer/knowledge/working_page_patterns/*.md (5)</code></li><li><code>agents/page_works_analyzer/golden_sets/*.json (3)</code></li><li><code>src/ai_agent_system/page_works/analyzer.py</code></li><li><code>src/ai_agent_system/page_works/schemas.py</code></li></ul>
+      
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="agents">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">CI</span>
+        <h3>Customer Insights v2 (agent-system)</h3>
+        <span class="score" title="Quality score 0-100">90</span>
+      </div>
+      <p class="role">Domain-agnostic system with conditional knowledge loading: 10 frameworks + 5 market_segments + 6 golden_sets, niche-routed at runtime. PROVEN on walk-in tubs / SaaS / debt relief.</p>
+      <div class="badges"><span class="badge badge-economy">tier-controlled</span></div>
+      <ul class="files"><li><code>agents/customer_insights/AGENT.md</code></li><li><code>agents/customer_insights/beliefs.md</code></li><li><code>agents/customer_insights/workflow.md</code></li><li><code>agents/customer_insights/knowledge/frameworks/*.md (10)</code></li><li><code>agents/customer_insights/knowledge/market_segments/*.md (5)</code></li><li><code>agents/customer_insights/golden_sets/*.json (6)</code></li><li><code>agents/customer_insights/segment_routing.yml</code></li><li><code>src/ai_agent_system/marketing/agents_v2/system_loader.py</code></li><li><code>src/ai_agent_system/marketing/agents_v2/customer_insights_v2.py</code></li></ul>
+      <div class="char-card-info"><strong>Character card:</strong> <code>prompts/customer_insights/v1.md</code> <span class="word-count">2264 words</span><details><summary>WHO I AM excerpt</summary><p class="who-excerpt">I am the Customer Insights Strategist on this performance-marketing team. My one job is to turn a fuzzy brief into 3-5 sharp, testable personas — each tied to a specific JTBD struggle, a verifiable trigger event, and pain you could quote back to the customer and get a nod. I do not write copy. I do not pick channels. I do not design pages. I produce the human truth that every other agent on this team uses as their starting point. If my personas are vague, the whole team produces vague work.</p></details></div>
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="agents">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">VM</span>
+        <h3>Voice &amp; Message Strategist</h3>
+        <span class="score" title="Quality score 0-100">75</span>
+      </div>
+      <p class="role">Value prop + hooks + headline angles by awareness stage</p>
+      <div class="badges"><span class="badge badge-page">page-aware</span><span class="badge badge-economy">tier-controlled</span></div>
+      <ul class="files"><li><code>src/ai_agent_system/marketing/agents/voice_message.py</code></li><li><code>prompts/voice_message/v1.md</code></li></ul>
+      <div class="char-card-info"><strong>Character card:</strong> <code>prompts/voice_message/v1.md</code> <span class="word-count">1263 words</span><details><summary>WHO I AM excerpt</summary><p class="who-excerpt">I am the Voice &amp; Message Strategist on this performance-marketing team. I take the personas the Customer Insights agent built, and I extract the message architecture every other agent will use: the one-sentence value proposition, the 3-5 hook variations, the 3-5 distinct headline angles tagged by awareness stage, and the verbatim customer voice that downstream copy generators must mimic. I am not a brand voice consultant. I am a direct-response conversion copywriter trained to find the exact wor</p></details></div>
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="agents">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">MP</span>
+        <h3>Media Planner</h3>
+        <span class="score" title="Quality score 0-100">75</span>
+      </div>
+      <p class="role">Channel profile + temperature + creative grammar</p>
+      <div class="badges"></div>
+      <ul class="files"><li><code>src/ai_agent_system/marketing/agents/media_planner.py</code></li><li><code>prompts/media_planner/v1.md</code></li></ul>
+      <div class="char-card-info"><strong>Character card:</strong> <code>prompts/media_planner/v1.md</code> <span class="word-count">1202 words</span><details><summary>WHO I AM excerpt</summary><p class="who-excerpt">I am the Media Planner on this performance-marketing team. I am not a media buyer in the platform sense — I do not push buttons in Ads Manager. I am a strategic media planner: I define the channel context the landing page lives inside. My output tells every other agent on the team how this audience will arrive, what mental state they will be in when they hit the page, what creative grammar the channel demands, and what proof intensity is required to convert someone from this specific traffic sou</p></details></div>
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="agents">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">AS</span>
+        <h3>Audience Strategist</h3>
+        <span class="score" title="Quality score 0-100">75</span>
+      </div>
+      <p class="role">Lookalike seeds + exclusion signals + audience profile</p>
+      <div class="badges"></div>
+      <ul class="files"><li><code>src/ai_agent_system/marketing/agents/audience_strategist.py</code></li><li><code>prompts/audience_strategist/v1.md</code></li></ul>
+      <div class="char-card-info"><strong>Character card:</strong> <code>prompts/audience_strategist/v1.md</code> <span class="word-count">1181 words</span><details><summary>WHO I AM excerpt</summary><p class="who-excerpt">I am the Audience Strategist on this performance-marketing team. I take the personas the Customer Insights agent produced, plus the channel context from the Media Planner, and I translate those into actionable targeting recipes. My output is what the human media buyer would paste into Ads Manager: who to seed lookalikes from, what behavioural signals predict conversion, who to actively exclude. I think in segments, cohorts, signals, and identity graphs. I do not think in personas — that&#x27;s not my</p></details></div>
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="agents">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">CA</span>
+        <h3>Conversion Architect (CRO)</h3>
+        <span class="score" title="Quality score 0-100">80</span>
+      </div>
+      <p class="role">User flow + ICE-scored test priorities + friction inventory</p>
+      <div class="badges"><span class="badge badge-page">page-aware</span></div>
+      <ul class="files"><li><code>src/ai_agent_system/marketing/agents/conversion_architect.py</code></li><li><code>prompts/conversion_architect/v1.md</code></li></ul>
+      <div class="char-card-info"><strong>Character card:</strong> <code>prompts/conversion_architect/v1.md</code> <span class="word-count">1307 words</span><details><summary>WHO I AM excerpt</summary><p class="who-excerpt">I am the Conversion Architect on this performance-marketing team — the CRO lead. My job is to design the funnel logic of this landing page and to identify the highest-leverage A/B tests this team should run first. I work with the personas, the channel context, and the message architecture the other agents produced, and I translate those into: stage-by-stage user flow, friction-point inventory, and a ranked list of A/B test priorities scored by ICE. I do not write copy and I do not design pixels;</p></details></div>
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="agents">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">ASM</span>
+        <h3>Assembler</h3>
+        <span class="score" title="Quality score 0-100">85</span>
+      </div>
+      <p class="role">Combines 5 sub-outputs + smart auto-correction for cross-field</p>
+      <div class="badges"></div>
+      <ul class="files"><li><code>src/ai_agent_system/marketing/assembler.py</code></li></ul>
+      
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="agents">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">HG</span>
+        <h3>Hypothesis Generator</h3>
+        <span class="score" title="Quality score 0-100">75</span>
+      </div>
+      <p class="role">Synthesizes 3-6 production-ready A/B test plans (Sonnet-4.6)</p>
+      <div class="badges"><span class="badge badge-page">page-aware</span><span class="badge badge-premium">sonnet-4.6 forced</span></div>
+      <ul class="files"><li><code>src/ai_agent_system/hypotheses/generator.py</code></li><li><code>prompts/hypothesis_generator/v1.md</code></li></ul>
+      <div class="char-card-info"><strong>Character card:</strong> <code>prompts/hypothesis_generator/v1.md</code> <span class="word-count">1831 words</span><details><summary>WHO I AM excerpt</summary><p class="who-excerpt">I am the A/B Test Hypothesis Generator on this performance-marketing team. I am the synthesis role: I do not produce original research, copy, channel strategy, or CRO architecture. I receive everything those specialists produced — personas, audience psychology, voice &amp; message angles, channel temperature, CRO friction inventory, page context — and I synthesize them into 3-6 production-ready A/B test plans that a human can paste into VWO/Convert/Optimizely and ship in the next sprint. I am the br</p></details></div>
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="agents">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">HJ</span>
+        <h3>Hypothesis Judge</h3>
+        <span class="score" title="Quality score 0-100">80</span>
+      </div>
+      <p class="role">Ship/iterate/kill verdicts + per-dimension scoring (gpt-4o-mini, ~13s)</p>
+      <div class="badges"><span class="badge badge-economy">tier-controlled</span></div>
+      <ul class="files"><li><code>src/ai_agent_system/hypotheses/judge.py</code></li><li><code>src/ai_agent_system/hypotheses/judge_schemas.py</code></li><li><code>prompts/hypothesis_judge/v1.md</code></li></ul>
+      <div class="char-card-info"><strong>Character card:</strong> <code>prompts/hypothesis_judge/v1.md</code> <span class="word-count">1898 words</span><details><summary>WHO I AM excerpt</summary><p class="who-excerpt">I am the Hypothesis Judge on this performance-marketing team. I do not generate test ideas. I do not write copy. I do not redesign pages. My one job is to read the test plans the Hypothesis Generator produced and to honestly answer one question per plan: *should this ship as-is, should it be revised, or should it be killed?* I am the safety net between the Generator&#x27;s optimism and the operator&#x27;s calendar. If I rubber-stamp every plan that comes through, the test program ships noise. If I kill ev</p></details></div>
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="agents">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">PD</span>
+        <h3>Product Director (Senior CRO Program Director)</h3>
+        <span class="score" title="Quality score 0-100">90</span>
+      </div>
+      <p class="role">Final decision synthesizer. Reads ALL expert outputs + operating_constraints + Page-Works preservation map → produces ranked ship/iterate/kill decision package with strategic_recommendation. Runs LAST (Wave 5).</p>
+      <div class="badges"><span class="badge badge-economy">tier-controlled</span></div>
+      <ul class="files"><li><code>agents/product_director/AGENT.md</code></li><li><code>agents/product_director/beliefs.md</code></li><li><code>agents/product_director/workflow.md</code></li><li><code>agents/product_director/anti_patterns.md</code></li><li><code>agents/product_director/knowledge/frameworks/test_program_management.md</code></li><li><code>agents/product_director/knowledge/decision_patterns/common_archetypes.md</code></li><li><code>agents/product_director/golden_sets/decision_low_traffic_high_baseline.json</code></li><li><code>src/ai_agent_system/product_director/director.py</code></li><li><code>src/ai_agent_system/product_director/schemas.py</code></li></ul>
+      
+    </div>
+    </div></section><section class="layer-section"><h2 class="layer-title">Observability</h2><div class="cards-grid">
+    <div class="node-card" data-status="complete" data-layer="observability">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">O0</span>
+        <h3>Agent Logger</h3>
+        <span class="score" title="Quality score 0-100">85</span>
+      </div>
+      <p class="role">JSONL hierarchy: Run → Agent → LLM Call</p>
+      <div class="badges"></div>
+      <ul class="files"><li><code>src/ai_agent_system/observability/</code></li></ul>
+      
+    </div>
+    
+    <div class="node-card" data-status="complete" data-layer="observability">
+      <div class="node-header">
+        <span class="status-dot" style="background:#10b981"></span>
+        <span class="node-id">O1</span>
+        <h3>Inspect CLI</h3>
+        <span class="score" title="Quality score 0-100">80</span>
+      </div>
+      <p class="role">Color-coded timeline reader for any run.jsonl</p>
+      <div class="badges"></div>
+      <ul class="files"><li><code>scripts/inspect_run.py</code></li></ul>
+      
+    </div>
+    
+    <div class="node-card" data-status="partial" data-layer="observability">
+      <div class="node-header">
+        <span class="status-dot" style="background:#f59e0b"></span>
+        <span class="node-id">O2</span>
+        <h3>Benchmark Scorer</h3>
+        <span class="score" title="Quality score 0-100">65</span>
+      </div>
+      <p class="role">Heuristic scoring per operation (one-shot, not continuous)</p>
+      <div class="badges"></div>
+      <ul class="files"><li><code>src/ai_agent_system/benchmark/</code></li></ul>
+      
+    </div>
+    </div></section><section class="layer-section"><h2 class="layer-title">Platform</h2><div class="cards-grid">
+    <div class="node-card" data-status="todo" data-layer="platform">
+      <div class="node-header">
+        <span class="status-dot" style="background:#6b7280"></span>
+        <span class="node-id">TP</span>
+        <h3>Test Platform Integration</h3>
+        <span class="score" title="Quality score 0-100">0</span>
+      </div>
+      <p class="role">Push test plans to VWO/Convert/Optimizely</p>
+      <div class="badges"></div>
+      <ul class="files"><li><em>not built</em></li></ul>
+      
+    </div>
+    
+    <div class="node-card" data-status="todo" data-layer="platform">
+      <div class="node-header">
+        <span class="status-dot" style="background:#6b7280"></span>
+        <span class="node-id">RT</span>
+        <h3>Results Tracker</h3>
+        <span class="score" title="Quality score 0-100">0</span>
+      </div>
+      <p class="role">Pull test results, compute lift, post-test reads</p>
+      <div class="badges"></div>
+      <ul class="files"><li><em>not built</em></li></ul>
+      
+    </div>
+    </div></section>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: true,
+    theme: 'dark',
+    themeVariables: {
+      darkMode: true,
+      background: '#1e293b',
+      primaryColor: '#0891b2',
+      primaryTextColor: '#fff',
+      primaryBorderColor: '#0e7490',
+      lineColor: '#94a3b8',
+      fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif'
+    }
+  });
+</script>
+
+</body>
+</html>

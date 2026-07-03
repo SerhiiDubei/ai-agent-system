@@ -1,0 +1,10 @@
+✓ 01 drafter/openai/gpt-4o — OK ($0.0418, 37.4s)
+✗ 02 drafter/anthropic/claude-sonnet-4.6 — FAILED: Exceeded maximum retries (2) for output validation
+✓ 03 drafter/deepseek/deepseek-chat — OK ($0.0093, 124.4s)
+✓ 04 semantic_extractor/openai/gpt-4.1-nano — OK ($0.0001, 1.8s)
+✓ 05 semantic_extractor/openai/gpt-5-nano — OK ($0.0005, 17.2s)
+✓ 06 semantic_extractor/google/gemini-2.5-flash — OK ($0.0005, 2.2s)
+✓ 07 pain_point_miner/openai/gpt-4.1-mini — OK ($0.0006, 4.9s)
+✓ 08 pain_point_miner/deepseek/deepseek-chat — OK ($0.0005, 6.5s)
+✓ 09 hypothesis_generator/openai/gpt-5 — OK ($0.0239, 43.7s)
+✓ 10 hypothesis_generator/anthropic/claude-sonnet-4.6 — OK ($0.0120, 15.3s)

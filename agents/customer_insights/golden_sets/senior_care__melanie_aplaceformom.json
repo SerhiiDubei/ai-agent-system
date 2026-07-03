@@ -1,0 +1,70 @@
+{
+  "_meta": {
+    "title": "Melanie — A Place for Mom (decision_helper archetype)",
+    "industry": "senior_care",
+    "source_url": "https://www.aplaceformom.com/",
+    "why_strong": "Classic decision_helper archetype. The user (Mom) and the buyer (Melanie) are different people. Trigger event (father's death) is sharp. Emotional language signals overwhelm: 'would have given up or settled'.",
+    "uses_frameworks": ["jtbd_christensen", "caregiver_burden", "moesta_forces_of_progress"]
+  },
+  "persona": {
+    "name": "Adult-daughter Melanie, 51, suddenly-widowed mom needs a plan",
+    "role": "decision_helper",
+    "age_range": "45-55",
+    "location_context": "Chicago suburb, two kids in middle school, full-time job, mother lives 90 minutes away in Wisconsin",
+    "income_band": "60_100k",
+    "digital_literacy": "high",
+    "primary_job": "When my father suddenly died and Mom is in their empty house alone with no plan, I want to find an assisted living place near family, fast — without making the wrong choice and traumatizing her further.",
+    "pain_points": [
+      {
+        "label": "Knows nothing about senior living industry",
+        "description": "Has never researched assisted living before; doesn't know what types exist, what insurance covers, what to look for in a tour",
+        "severity": "high",
+        "frequency": "one_time",
+        "addressable_by_offer": true
+      },
+      {
+        "label": "Caregiver guilt + grief overlap",
+        "description": "Just lost dad; doing rapid research with grief brain; feels guilty that she's even thinking about institutionalizing mom right after",
+        "severity": "critical",
+        "frequency": "constant",
+        "addressable_by_offer": false
+      },
+      {
+        "label": "Geographic constraint with limited bandwidth",
+        "description": "Wants Mom near her own family in Chicago; can only tour places on weekends; can't take a week off work to visit a dozen communities",
+        "severity": "high",
+        "frequency": "frequent",
+        "addressable_by_offer": true
+      },
+      {
+        "label": "Sibling friction",
+        "description": "Brother in California thinks Mom should stay in her own house with a part-time aide; not aligned on cost or urgency",
+        "severity": "medium",
+        "frequency": "occasional",
+        "addressable_by_offer": false
+      }
+    ],
+    "trust_needs": [
+      "Real person to call who knows the local market and isn't a salesperson on commission",
+      "Pre-vetted shortlist (not '47 communities to choose from')",
+      "Actual reviews from families who placed a parent recently",
+      "Clear pricing with no surprise fees"
+    ],
+    "decision_triggers": [
+      "Phone call with a real local advisor within 24 hours",
+      "Curated shortlist of 3 places matching budget + geo, ready by next weekend",
+      "Tour scheduling done for her, not by her"
+    ],
+    "objections": [
+      "Brother will say I'm rushing this and didn't try hard enough",
+      "What if Mom hates it and we have to move her again?",
+      "Is this 'free service' actually free or am I being upsold somewhere?"
+    ],
+    "channel_behavior": "Mobile during commute and lunch break; desktop late evening after kids in bed; opens emails immediately but doesn't always reply"
+  },
+  "verbatim_quotes": [
+    "Without them, I probably would have given up or settled.",
+    "I just don't have time to figure this out from scratch right now.",
+    "My brother thinks I'm overreacting but he's not the one driving up there every weekend."
+  ]
+}

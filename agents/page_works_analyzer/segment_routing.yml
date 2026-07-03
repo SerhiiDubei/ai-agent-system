@@ -1,0 +1,146 @@
+# Page-Works Analyzer routing (knowledge file selection per brief)
+
+niches:
+  walk_in_tubs:
+    segment: senior_care
+    frameworks_extra: []
+    golden_sets: [senior_care__working_walkin_tubs]
+
+  mobility_aids:
+    segment: senior_care
+    frameworks_extra: []
+    golden_sets: [senior_care__working_walkin_tubs]
+
+  hearing_aids:
+    segment: senior_care
+    frameworks_extra: []
+    golden_sets: [senior_care__working_walkin_tubs]
+
+  senior_living:
+    segment: senior_care
+    frameworks_extra: []
+    golden_sets: [senior_care__working_walkin_tubs]
+
+  medicare_advisory:
+    segment: senior_care
+    frameworks_extra: []
+    golden_sets: [senior_care__working_walkin_tubs]
+
+  debt_relief:
+    segment: financial_services
+    frameworks_extra: []
+    golden_sets: [financial_services__working_debt_relief]
+
+  credit_repair:
+    segment: financial_services
+    frameworks_extra: []
+    golden_sets: [financial_services__working_debt_relief]
+
+  insurance_life:
+    segment: financial_services
+    frameworks_extra: []
+    golden_sets: [financial_services__working_debt_relief]
+
+  saas_workflow:
+    segment: b2b_saas
+    frameworks_extra: []
+    golden_sets: [b2b_saas__working_dev_tool]
+
+  saas_dev_tools:
+    segment: b2b_saas
+    frameworks_extra: []
+    golden_sets: [b2b_saas__working_dev_tool]
+
+  saas_security:
+    segment: b2b_saas
+    frameworks_extra: []
+    golden_sets: [b2b_saas__working_dev_tool]
+
+  supplements:
+    segment: dtc_ecom
+    frameworks_extra: []
+    golden_sets: [dtc_ecom__working_supplements]
+
+  beauty:
+    segment: dtc_ecom
+    frameworks_extra: []
+    golden_sets: [dtc_ecom__working_supplements]
+
+  wellness:
+    segment: dtc_ecom
+    frameworks_extra: []
+    golden_sets: [dtc_ecom__working_supplements]
+
+  telehealth_mental_health:
+    segment: healthcare_consumer
+    frameworks_extra: []
+    golden_sets: [healthcare__working_telehealth]
+
+  telehealth_general:
+    segment: healthcare_consumer
+    frameworks_extra: []
+    golden_sets: [healthcare__working_telehealth]
+
+keyword_signals:
+  senior_care:
+    - "walk-in tub"
+    - "walk in tub"
+    - "walk_in"
+    - "stairlift"
+    - "hearing aid"
+    - "Medicare"
+    - "65+"
+    - "seniors"
+    - "elderly"
+    - "aging in place"
+    - "in-home care"
+    - "fall detection"
+    - "mobility aid"
+    - "assisted living"
+  financial_services:
+    - "debt relief"
+    - "credit repair"
+    - "credit card debt"
+    - "consolidat"
+    - "loan"
+    - "lending"
+    - "BNPL"
+    - "insurance"
+    - "tax"
+  b2b_saas:
+    - "B2B"
+    - "SaaS"
+    - "workflow"
+    - "CRM"
+    - "dev tool"
+    - "developer"
+    - "devops"
+    - "engineering team"
+    - "subscription software"
+    - "enterprise"
+  dtc_ecom:
+    - "DTC"
+    - "subscription"
+    - "supplement"
+    - "vitamin"
+    - "wellness"
+    - "beauty"
+    - "skincare"
+  healthcare_consumer:
+    - "telehealth"
+    - "therapy"
+    - "mental health"
+    - "telemed"
+    - "health tracking"
+    - "anxiety"
+    - "depression"
+
+default_frameworks:
+  - lift_model_reverse
+  - trust_anatomy
+  - page_archetype_patterns
+
+catch_all:
+  segment: null
+  frameworks_extra: []
+  golden_sets: [b2b_saas__working_dev_tool, senior_care__working_walkin_tubs]

@@ -1,0 +1,65 @@
+{
+  "_meta": {
+    "title": "Decision package: high-traffic experimental SaaS demo LP",
+    "archetype": "C — High-traffic, baseline below benchmark",
+    "why_strong_example": "Demonstrates allowance of 1 super test for direction-finding when traffic supports it. 4 plans → 3 ship (1 super + 2 basic in parallel) + 0 iterate + 1 kill. Strategic recommendation points operator toward holding next-batch budget until super test verdict."
+  },
+  "input_summary": {
+    "monthly_traffic": 80000,
+    "baseline_conversion_pct": 4.2,
+    "time_window_days": 21,
+    "expected_lift_floor_pct": 10.0,
+    "risk_appetite": "experimental",
+    "prior_tests_tried": [
+      "Hero CTA copy variants (Book demo / Get started / See it work) — Get started won by 8%"
+    ],
+    "page_works_summary": "baseline=works (good for B2B SaaS demo); trust anatomy 50% load on logo wall + product screenshot + case study; preservation_zones include hero screenshot + customer logos.",
+    "hg_plans_count": 4
+  },
+  "decision": {
+    "shipped_plans": [
+      {
+        "test_id": "T1-paradigm-shift-replace-demo-with-trial",
+        "ship_order": 1,
+        "parallel_group": null,
+        "final_sample_size_per_arm": 28000,
+        "final_duration_days": 21,
+        "why_this_first": "Super test: replace 'Book a demo' funnel with 'Start free trial' for self-serve segment. High traffic supports clean signal at the operator's expected_lift_floor of 10%. If wins, fundamentally changes program direction; if loses, validates current paradigm. Either way, biggest single learning available."
+      },
+      {
+        "test_id": "T2-product-screenshot-feature-rotation",
+        "ship_order": 2,
+        "parallel_group": 2,
+        "final_sample_size_per_arm": 12000,
+        "final_duration_days": 14,
+        "why_this_first": "Basic test on product screenshot variant — different feature highlighted (collaboration vs speed vs AI integrations). Page-Works flagged screenshot as 20% load — testing variants is preservation-aware (we keep screenshot, vary content)."
+      },
+      {
+        "test_id": "T3-icp-logo-wall-reorder",
+        "ship_order": 2,
+        "parallel_group": 2,
+        "final_sample_size_per_arm": 12000,
+        "final_duration_days": 14,
+        "why_this_first": "Basic test parallel-safe with T2 (different page element). Reorder logo wall to lead with most ICP-relevant brands by visitor segment. Preservation-aware (keep logos, vary order)."
+      }
+    ],
+    "iterate_plans": [],
+    "killed_plans": [
+      {
+        "test_id": "T4-add-aggressive-urgency-banner",
+        "kill_reason": "Plan adds 'Limited demo slots — book today' urgency banner. Page-Works specifically warned: 'DO NOT add aggressive urgency mechanisms. Falsely manufactured urgency erodes B2B trust catastrophically.' Plan violates documented anti-pattern; high downside risk; no traffic to recover from a brand-trust erosion event.",
+        "kill_category": "preservation_zone_violation"
+      }
+    ],
+    "strategic_recommendation": "This batch's super test (T1: paradigm shift to free-trial funnel) is the highest-leverage decision in the program. Recommend operator HOLD next-batch traffic budget until T1 verdict — if it wins, the program pivots to PLG optimization; if it loses, current sales-led paradigm is validated and program continues with incremental optimization. T2 + T3 in parallel will inform creative direction either way.",
+    "constraint_warnings": [
+      "Operator has experimental risk_appetite — allowed 1 super test in batch. Without that appetite signal, T1 would be deferred.",
+      "Prior CTA-copy test result is incorporated: T1's variant CTA uses 'Get started' (the prior winner) for the trial flow."
+    ],
+    "expert_conflicts_resolved": [
+      "Hypothesis Generator's T4 plan had high ICE (urgency banners often lift in non-B2B niches). Page-Works flagged it as preservation_zone_violation. Director sided with Page-Works — B2B SaaS audience is uniquely sensitive to manufactured urgency."
+    ],
+    "next_batch_focus": "Wait for T1 super-test result first. If T1 wins (paradigm shift to trial): next batch focuses on trial-funnel optimization (onboarding, activation milestones). If T1 loses (sales-led wins): next batch focuses on demo-form qualification + sales-handoff optimization.",
+    "confidence": 0.88
+  }
+}

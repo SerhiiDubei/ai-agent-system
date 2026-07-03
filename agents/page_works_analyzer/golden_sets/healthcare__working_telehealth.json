@@ -1,0 +1,110 @@
+{
+  "_meta": {
+    "title": "Working analysis: Telehealth therapy LP at 8.2% start-trial baseline",
+    "industry": "healthcare_consumer",
+    "page_archetype": "lead_capture",
+    "baseline_conversion_pct": 8.2,
+    "why_strong_example": "Healthcare-consumer analysis showing how privacy-sensitive niche has DIFFERENT trust anatomy than retail; identifies HIPAA + insurance logos + cancellation policy as load-bearing; warns against pathologizing language and aggressive urgency.",
+    "uses_frameworks": ["lift_model_reverse", "trust_anatomy", "page_archetype_patterns"]
+  },
+  "input_summary": {
+    "url": "Telehealth therapy LP example (Talkspace/BetterHelp tier)",
+    "baseline_conversion_pct": 8.2,
+    "monthly_traffic": 350000,
+    "page_archetype": "lead_capture",
+    "primary_metric": "trial_assessment_completion_rate",
+    "form_fields": ["3-question intake", "insurance_check", "email_for_match"]
+  },
+  "analysis": {
+    "baseline_assessment": "works",
+    "lift_scoring": {
+      "value_proposition": 4,
+      "relevance": 5,
+      "clarity": 4,
+      "anxiety_management": 5,
+      "distraction": 4,
+      "urgency": 2
+    },
+    "trust_anatomy": [
+      {
+        "element": "HIPAA compliance callout (above the fold)",
+        "estimated_load_pct": 18,
+        "why_working": "Privacy-paranoid audience checks; explicit callout removes a primary objection"
+      },
+      {
+        "element": "Insurance accepted logos (BCBS, Aetna, Cigna prominent)",
+        "estimated_load_pct": 17,
+        "why_working": "Audience needs to see THEIR specific insurance; cash-pay shock is the #1 abandonment driver — logos defuse it before form-start"
+      },
+      {
+        "element": "Licensed clinicians count + state coverage map",
+        "estimated_load_pct": 12,
+        "why_working": "Audience worries about clinician quality; state-by-state coverage = legitimacy + 'available in my state'"
+      },
+      {
+        "element": "Clear cancellation policy ('cancel anytime, no fees')",
+        "estimated_load_pct": 10,
+        "why_working": "Mental health audience feels 'trapped' in many subscriptions; clear exit-path overcomes this"
+      },
+      {
+        "element": "App store rating + count (4.6★, 80K+ reviews)",
+        "estimated_load_pct": 8,
+        "why_working": "Younger demographic checks app store; volume + score combined"
+      },
+      {
+        "element": "'No surprise billing' explicit",
+        "estimated_load_pct": 5,
+        "why_working": "Healthcare-specific objection-handler; appears in fine print on most pages but bigger when above fold"
+      }
+    ],
+    "preservation_zones": [
+      {
+        "element": "hipaa_callout_above_fold",
+        "reason": "18% load. Privacy-paranoid audience checks for this explicitly; absence is dealbreaker."
+      },
+      {
+        "element": "insurance_logos_prominent",
+        "reason": "17% load. Audience needs to see THEIR insurance — generic 'we accept all insurance' tanks vs specific logos."
+      },
+      {
+        "element": "licensed_clinicians_state_map",
+        "reason": "12% load. Audience filters out states they're not in; state map = audience self-qualification."
+      },
+      {
+        "element": "cancellation_policy_clarity",
+        "reason": "10% load. Hiding cancellation tanks LTV/refunds even if it lifts initial signups — long-term harm."
+      },
+      {
+        "element": "no_surprise_billing_language",
+        "reason": "5% load. Healthcare-specific objection-handler; small but specific."
+      }
+    ],
+    "change_safe_zones": [
+      {
+        "element": "intake_question_COPY",
+        "reason": "Reword each of the 3 intake questions while keeping count + sequence — test variants"
+      },
+      {
+        "element": "hero_subhead_variants",
+        "reason": "Hero hero-headline is preserve; subhead is change-safe with appropriate tone"
+      },
+      {
+        "element": "below_fold_clinician_bio_layout",
+        "reason": "How clinician profiles are displayed (carousel vs grid vs text) — testable"
+      },
+      {
+        "element": "secondary_cta_copy",
+        "reason": "'Get matched in 24h' vs 'Find a therapist' vs 'See if therapy is right for you' — testable"
+      }
+    ],
+    "warnings_for_downstream": [
+      "DO NOT propose removing HIPAA callout. 18% load on the privacy-sensitive audience.",
+      "DO NOT propose replacing insurance logos with 'we accept all insurance' generic copy. Audience needs specific brand recognition.",
+      "DO NOT propose pathologizing language ('treat your depression' / 'manage your anxiety'). Audience self-identifies as 'going through something', not 'mentally ill'. Triggers identity rejection.",
+      "DO NOT add aggressive urgency ('Limited slots — get matched today!'). Trust erosion + bounce rate spike on this audience.",
+      "DO NOT propose hiding cancellation policy for 'less friction'. +signups but huge refund/LTV problems.",
+      "Tests on intake question COPY (not count) and below-fold clinician layout are highest-leverage."
+    ],
+    "confidence": 0.87
+  }
+}

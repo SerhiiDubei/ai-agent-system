@@ -1,0 +1,70 @@
+{
+  "_meta": {
+    "title": "Decision package: low-traffic high-baseline working senior-care LP",
+    "archetype": "A — Low-traffic high-baseline working page",
+    "why_strong_example": "Demonstrates aggressive defer discipline + program-level strategic thinking. 4 plans considered → 1 ship + 2 iterate + 1 kill. Strategic recommendation points operator toward audience-level investment, not page tests."
+  },
+  "input_summary": {
+    "monthly_traffic": 12000,
+    "baseline_conversion_pct": 21.3,
+    "time_window_days": 14,
+    "expected_lift_floor_pct": 5.0,
+    "risk_appetite": "balanced",
+    "prior_tests_tried": [
+      "Reduced form 4→3 fields, +6.2% in March 2026",
+      "Hero subheadline tweak, no significant lift in April 2026"
+    ],
+    "page_works_summary": "baseline=works; trust anatomy 55% load; preservation_zones include hero, phone, form_count, BBB stack",
+    "hg_plans_count": 4
+  },
+  "decision": {
+    "shipped_plans": [
+      {
+        "test_id": "T2-trust-badge-row-test",
+        "ship_order": 1,
+        "parallel_group": null,
+        "final_sample_size_per_arm": 4500,
+        "final_duration_days": 12,
+        "why_this_first": "Highest-confidence basic test; tests stacking density of trust badges (preservation-safe — adds, doesn't remove). Operator's traffic supports clean detection of 4-6% lift in window."
+      }
+    ],
+    "iterate_plans": [
+      {
+        "test_id": "T1-cta-microcopy-variant",
+        "blocker": "Sample size insufficient — needs 12,000/arm to detect claimed 3% lift; operator only has 4,500/arm in window.",
+        "what_to_fix": [
+          "Raise minimum_detectable_lift to 6%+ (more aggressive variant copy)",
+          "Or shrink test scope to one CTA on one viewport for cleaner signal"
+        ],
+        "suggested_owner": "hypothesis_generator"
+      },
+      {
+        "test_id": "T3-testimonial-rotation",
+        "blocker": "Variant description ambiguous — 'rotate testimonials' doesn't specify which testimonials, in what order, or whether the rotation is per-page-load or session-persistent.",
+        "what_to_fix": [
+          "Specify exactly 3-5 testimonial slots and which testimonials go in which",
+          "Specify rotation logic explicitly (per-page-load vs session-sticky)",
+          "Define how 'winner' would be measured given rotation (CTR per testimonial slot vs overall conversion)"
+        ],
+        "suggested_owner": "hypothesis_generator"
+      }
+    ],
+    "killed_plans": [
+      {
+        "test_id": "T4-form-reduce-3-to-2-fields",
+        "kill_reason": "Operator's prior_tests_tried already shows '4→3 form-field reduction, +6.2% lift in March 2026' — this plan is a near-duplicate hypothesis (just one more field reduction). Going from 3→2 may degrade lead quality (current 3-field form is filtering effectively). No new signal expected.",
+        "kill_category": "prior_test_repeat"
+      }
+    ],
+    "strategic_recommendation": "This page is mature: trust anatomy is 55% load, prior optimizations harvested obvious wins, traffic is constrained. Expect 3-7% lift max from page tests this cycle. Recommend allocating next quarter's optimization investment toward AUDIENCE expansion — current lookalike seeds are narrow, and the biggest growth lever is reaching adjacent senior-care segments (hearing aids, mobility aids) with the same trust-anatomy template.",
+    "constraint_warnings": [
+      "operator's MDE floor at 4500/arm = ~5% relative lift on 21% baseline. Plans claiming smaller detectable effects are noise.",
+      "12k/month traffic limits to 1 sequential test per 2 weeks — parallel testing not supported here."
+    ],
+    "expert_conflicts_resolved": [
+      "Hypothesis Generator's T1 plan claimed 3% expected lift on 4500/arm — feasibility check failed; downgraded to 'iterate' rather than 'ship'."
+    ],
+    "next_batch_focus": "Test trust-anatomy DENSITY (does adding a 4th badge improve conversion?) given current preservation discipline. Also: the operator should consider running an audience expansion test in parallel with the LP queue — different infrastructure but compounds with page learnings.",
+    "confidence": 0.82
+  }
+}

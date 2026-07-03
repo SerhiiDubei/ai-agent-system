@@ -1,0 +1,61 @@
+{
+  "_meta": {
+    "title": "Paula — Kohler Walk-In Bath",
+    "industry": "senior_care",
+    "source_url": "https://www.homepridebath.com/case-studies/walkinbath",
+    "why_strong": "Hits every dimension: named buyer, hard medical trigger (hip replacement), identity quote ('age out in the house'), brand-trust shortcut ('If you were trusted by Kohler, you're gonna be okay'), fixed-income financial frame.",
+    "uses_frameworks": ["jtbd_christensen", "schwartz_awareness_stages", "health_belief_model", "identity_protective_cognition"]
+  },
+  "persona": {
+    "name": "Niwot Paula, 68, recently-retired educator with new hip",
+    "role": "primary_buyer",
+    "age_range": "65-75",
+    "location_context": "Niwot, Colorado retiree, owns home outright, planning to age in place",
+    "income_band": "30_60k",
+    "digital_literacy": "medium",
+    "primary_job": "When I step into my deep Jacuzzi tub each morning since my hip replacement and feel my leg shake, I want to install a walk-in bath I can actually use, so I can age out in this house instead of moving somewhere I'd hate.",
+    "pain_points": [
+      {
+        "label": "Cannot stand long in shower",
+        "description": "Since hip surgery, standing for the length of a shower causes leg shaking and dizziness — has had to grip the wall every time",
+        "severity": "high",
+        "frequency": "constant",
+        "addressable_by_offer": true
+      },
+      {
+        "label": "Cannot exit Jacuzzi tub safely",
+        "description": "Cannot lift her surgical leg over the deep Jacuzzi edge to exit — has avoided baths for 4 months since surgery",
+        "severity": "high",
+        "frequency": "frequent",
+        "addressable_by_offer": true
+      },
+      {
+        "label": "Fear of needing assisted living",
+        "description": "Identity-threat: aging-in-place is non-negotiable; daughter has mentioned 'maybe a community' once and it sat badly",
+        "severity": "critical",
+        "frequency": "occasional",
+        "addressable_by_offer": false
+      }
+    ],
+    "trust_needs": [
+      "Trusted brand name (recognized — 'Kohler' was the credibility shortcut)",
+      "Local installer with named technician, not a faceless 1-800 line",
+      "No high-pressure sales pitch in the home"
+    ],
+    "decision_triggers": [
+      "Realization mid-shower that she might fall before her leg fully healed",
+      "Brand familiarity ('If you were trusted by Kohler, you're gonna be okay')",
+      "Financing option that fits Social Security cash flow ($478/mo over 5 years)"
+    ],
+    "objections": [
+      "Worried installation will damage existing tile work",
+      "Husband not yet sure they need to spend $24K when they 'managed before'"
+    ],
+    "channel_behavior": "Desktop in afternoons; reads full pages slowly; checks BBB and Google reviews before any in-home consultation"
+  },
+  "verbatim_quotes": [
+    "I cannot stand up in the shower, and I cannot get out of our beautiful Jacuzzi tub.",
+    "Kohler is the best.",
+    "If you were trusted by Kohler, you're gonna be okay."
+  ]
+}

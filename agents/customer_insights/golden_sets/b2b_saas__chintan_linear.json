@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "title": "Chintan Turakhia — Coinbase × Linear",
+    "industry": "b2b_saas",
+    "source_url": "https://linear.app/customers/coinbase",
+    "why_strong": "Sharp executive worldview with quotable lines ('I don't think developers are slow, I think companies are slow'), precise trigger tied to external change (AI agents becoming 'genuinely capable' in early 2026), metric-anchored pain (merged PRs/day), and explicit decision context (top-down mandate — he ordered engineers to delete IDEs for 2 weeks).",
+    "uses_frameworks": ["jtbd_christensen", "moesta_forces_of_progress", "klement_jobs_as_progress"]
+  },
+  "persona": {
+    "name": "Champion Chintan, Head of Engineering, AI-acceleration mandate",
+    "role": "primary_buyer",
+    "age_range": "35-45",
+    "location_context": "San Francisco, runs Base App engineering org at Coinbase, on-the-ground responsibility for shipping",
+    "income_band": "unknown",
+    "digital_literacy": "high",
+    "primary_job": "When my engineers are spending 30% of their day answering Slack questions instead of merging PRs, and AI agents have just become genuinely capable, I want to give the agents structured queryable knowledge so they can do the coordination work, so I can stop being slower than my hiring promised we would be.",
+    "pain_points": [
+      {
+        "label": "Knowledge scattered across heads + Slack + meetings",
+        "description": "Critical context lives in Slack threads from 6 weeks ago, in PMs' heads, in unrecorded standup decisions; agents (and new hires) can't find any of it",
+        "severity": "high",
+        "frequency": "constant",
+        "addressable_by_offer": true
+      },
+      {
+        "label": "Hidden tax of context-switching",
+        "description": "Engineers interrupted constantly to answer 'what was the decision on X' — measurable drag on merged-PRs-per-day metric",
+        "severity": "high",
+        "frequency": "constant",
+        "addressable_by_offer": true
+      },
+      {
+        "label": "Coordination overhead bottlenecking shipping",
+        "description": "By early 2026 AI agents are capable enough to ship code; the limit is org coordination, not engineer skill",
+        "severity": "critical",
+        "frequency": "constant",
+        "addressable_by_offer": true
+      }
+    ],
+    "trust_needs": [
+      "Used by other engineering orgs at peer companies (Ramp, Vercel-tier)",
+      "API + webhook surface deep enough that agents can query reliably",
+      "Doesn't require migration from existing toolchain (Linear specifically: not a rip-and-replace)"
+    ],
+    "decision_triggers": [
+      "Personal demo where his team's actual workflow is the example",
+      "Existing usage signal from his team (someone already adopted it bottom-up)",
+      "Clear path to having agents read/write tickets autonomously"
+    ],
+    "objections": [
+      "What about Jira migration cost / muscle memory of existing engineers?",
+      "Is the data model open enough that we can build our own integrations?",
+      "Will this be slow at our scale?"
+    ],
+    "channel_behavior": "X / LinkedIn for industry signal; podcasts on commute; reads founder posts; ignores cold outbound entirely"
+  },
+  "verbatim_quotes": [
+    "I don't think developers are slow, I think companies are slow.",
+    "I'm not designing things for humans anymore. I'm designing things for agents.",
+    "Why can't an agent do this, and how do we make it possible?"
+  ]
+}

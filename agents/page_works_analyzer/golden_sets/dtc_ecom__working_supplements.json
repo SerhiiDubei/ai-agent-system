@@ -1,0 +1,104 @@
+{
+  "_meta": {
+    "title": "Working analysis: DTC supplements LP at 4.1% baseline (subscription)",
+    "industry": "dtc_ecom",
+    "page_archetype": "ecom_product",
+    "baseline_conversion_pct": 4.1,
+    "why_strong_example": "DTC ecom analysis showing how 4% can be excellent for the niche; identifies third-party testing badges + UGC reviews + founder story as load-bearing; warns specifically against 'modernization' that loses real-customer photos.",
+    "uses_frameworks": ["lift_model_reverse", "trust_anatomy", "page_archetype_patterns"]
+  },
+  "input_summary": {
+    "url": "DTC supplement LP example (AG1-tier brand)",
+    "baseline_conversion_pct": 4.1,
+    "monthly_traffic": 220000,
+    "page_archetype": "ecom_product",
+    "primary_metric": "subscription_signup_rate",
+    "form_fields": ["email_for_quiz_then_full_checkout"]
+  },
+  "analysis": {
+    "baseline_assessment": "works",
+    "lift_scoring": {
+      "value_proposition": 5,
+      "relevance": 5,
+      "clarity": 4,
+      "anxiety_management": 5,
+      "distraction": 4,
+      "urgency": 3
+    },
+    "trust_anatomy": [
+      {
+        "element": "Star rating + review count (4.7★ from 12,400+ reviews)",
+        "estimated_load_pct": 18,
+        "why_working": "Volume of reviews matters more than score; 12k+ signals ongoing operations + audience size; specific count beats 'thousands of customers'"
+      },
+      {
+        "element": "UGC photo wall — real customers with first names + cities",
+        "estimated_load_pct": 16,
+        "why_working": "Real ≫ stock for DTC wellness audience; photos with names + cities = the audience self-recognizes"
+      },
+      {
+        "element": "Third-party testing badges (NSF Certified for Sport, cGMP)",
+        "estimated_load_pct": 12,
+        "why_working": "Supplement audience checks for these; absence is a deal-killer; presence is a quiet but heavy signal"
+      },
+      {
+        "element": "Founder story video (health-issue origin)",
+        "estimated_load_pct": 10,
+        "why_working": "Founder-led brand authenticity; the 'why I made this' story beats abstract benefit copy"
+      },
+      {
+        "element": "Money-back guarantee (90-day) + cancel-anytime",
+        "estimated_load_pct": 8,
+        "why_working": "Subscription audience needs clear exit path; this overcomes the 'trapped in subscription' fear"
+      }
+    ],
+    "preservation_zones": [
+      {
+        "element": "review_count_visibility",
+        "reason": "18% load. Hiding count for 'cleaner star display' loses the volume signal. 12k reviews IS the credibility."
+      },
+      {
+        "element": "ugc_photo_wall_real_customers",
+        "reason": "16% load. Replacing real customer photos with stock or models has tanked DTC wellness pages by 10-15% in published case studies."
+      },
+      {
+        "element": "third_party_testing_badges_NSF_cGMP",
+        "reason": "12% load. Supplement audience-specific signal; absence reads as 'sketchy brand'."
+      },
+      {
+        "element": "founder_story_video_or_link",
+        "reason": "10% load. Founder authenticity is differentiator vs commodity supplements."
+      },
+      {
+        "element": "money_back_guarantee_terms_explicit",
+        "reason": "8% load. Subscription-friendly cancellation copy overcomes the lock-in fear."
+      }
+    ],
+    "change_safe_zones": [
+      {
+        "element": "below_fold_benefit_list_ordering",
+        "reason": "Tertiary content; reordering is safe to test"
+      },
+      {
+        "element": "ingredient_callout_design",
+        "reason": "Ingredient callouts can be tested for visual variants without changing content"
+      },
+      {
+        "element": "email_capture_incentive_copy",
+        "reason": "'Get 15% off your first subscription' vs 'Take the quiz for personalized recs' — testable variants"
+      },
+      {
+        "element": "secondary_press_logos",
+        "reason": "Press logo selection (which 4-6 logos shown) — test for highest recognition by ICP"
+      }
+    ],
+    "warnings_for_downstream": [
+      "DO NOT propose replacing real customer UGC photos with studio models. 16% load + audience self-selection signal.",
+      "DO NOT propose hiding/removing review count for 'cleaner display'. Volume is the credibility, not the score.",
+      "DO NOT propose removing third-party testing badges. Supplement audience checks for these specifically.",
+      "DO NOT propose removing founder story or money-back guarantee. Subscription audience needs both authenticity + exit-path reassurance.",
+      "Tests on email-capture INCENTIVE COPY ('15% off' vs 'quiz' vs 'free shipping') are highest-leverage change-safe."
+    ],
+    "confidence": 0.86
+  }
+}

@@ -1,0 +1,18 @@
+# Product Director routing — works across all niches; the agent is universal
+
+niches: {}
+
+keyword_signals: {}
+
+default_frameworks:
+  - test_program_management
+
+catch_all:
+  segment: null
+  frameworks_extra: []
+  # Diverse golden_sets covering 3 archetype patterns (preservation-heavy,
+  # high-traffic experimental, constrained-window basic-only)
+  golden_sets:
+    - decision_low_traffic_high_baseline
+    - decision_high_traffic_experimental
+    - decision_constrained_window_basic_only

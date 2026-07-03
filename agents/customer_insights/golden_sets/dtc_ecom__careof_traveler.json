@@ -1,0 +1,64 @@
+{
+  "_meta": {
+    "title": "Care/of customer — 'constant traveler'",
+    "industry": "dtc_ecom",
+    "source_url": "https://www.dtcpatterns.com/dtc-patterns-articles/this-care-of-quiz-helps-you-skip-the-confusion-in-the-vitamin-aisle",
+    "why_strong": "Specific situational trigger (travel), specific physical pain (six bottles), and the quiz-as-trojan-horse decision pattern that defines personalized DTC. JTBD is operational, not aspirational.",
+    "uses_frameworks": ["klement_jobs_as_progress", "jtbd_christensen", "sharp_romaniuk_ceps"]
+  },
+  "persona": {
+    "name": "Road-warrior Rachel, 34, consultant who hops climates weekly",
+    "role": "primary_buyer",
+    "age_range": "28-40",
+    "location_context": "NYC home base, travels for work 3 weeks/month, hotels in different climates and time zones, cooks rarely",
+    "income_band": "60_100k",
+    "digital_literacy": "high",
+    "primary_job": "When I'm packing my carry-on at 11pm before a 6am flight and realize I've forgotten which vitamins to bring, I want a routine that's already personalized and pre-portioned, so I can stop being the friend whose immune system collapses every quarter.",
+    "pain_points": [
+      {
+        "label": "Six bottles is a non-starter for travel",
+        "description": "Lugging 6 supplement bottles in carry-on means TSA scrutiny + weight + half of them get left at home; ends up taking nothing some weeks",
+        "severity": "high",
+        "frequency": "frequent",
+        "addressable_by_offer": true
+      },
+      {
+        "label": "Routine collapses across time zones",
+        "description": "Take supplements 'with breakfast' loses meaning when breakfast was 4 hours ago in another time zone; misses entire days of the regimen",
+        "severity": "medium",
+        "frequency": "constant",
+        "addressable_by_offer": true
+      },
+      {
+        "label": "Decision fatigue at the supplement aisle",
+        "description": "Doesn't want to research each vitamin individually; got overwhelmed at Whole Foods last month and bought nothing",
+        "severity": "medium",
+        "frequency": "occasional",
+        "addressable_by_offer": true
+      }
+    ],
+    "trust_needs": [
+      "Quiz feels personalized, not algorithmic guess (asks specific questions)",
+      "Third-party testing on the supplements (NSF / cGMP)",
+      "Easy to skip a month or pause the subscription",
+      "Founder story or MD on advisory board"
+    ],
+    "decision_triggers": [
+      "Quiz on a lunch break — low-effort trial",
+      "Personalized recommendations with reasoning ('we recommended X because you said Y')",
+      "Free shipping + cancel anytime",
+      "Friend posted her Care/of pack on Instagram"
+    ],
+    "objections": [
+      "Are these actually high quality or is the personalization just marketing?",
+      "What if I don't want one of the recommendations?",
+      "Will this auto-renew at a higher price after the intro?"
+    ],
+    "channel_behavior": "Instagram + TikTok primary discovery; will Google '[brand] reviews reddit' before checkout; mobile checkout; reads reviews longer than the product page"
+  },
+  "verbatim_quotes": [
+    "I'm constantly hopping time zones and climates, so staying healthy is tough.",
+    "I had a shelf full of half-used vitamins I'd forget to take.",
+    "Now my daily packs travel with me everywhere — no more lugging around six different bottles."
+  ]
+}

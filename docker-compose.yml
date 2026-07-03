@@ -1,0 +1,107 @@
+# ─────────────────────────────────────────────
+# Local dev / test stack
+# ─────────────────────────────────────────────
+# Start: docker compose up -d --build
+# Reset: docker compose down -v
+# ─────────────────────────────────────────────
+
+services:
+
+  # ───── Application ─────
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    env_file: .env
+    environment:
+      - DATABASE_URL=postgresql+psycopg://ai_agent:ai_agent@postgres:5432/ai_agent_system
+      - FIRECRAWL_BASE_URL=http://firecrawl-api:3002
+      - OBSIDIAN_VAULT_PATH=/vault
+    volumes:
+      # Local Obsidian vault (separate git repo, локально mounted)
+      - ${OBSIDIAN_VAULT_HOST_PATH:-./local-vault}:/vault:ro
+      # Hot-reload src under dev (override з docker-compose.dev.yml)
+      - ./src:/app/src:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      firecrawl-api:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ───── Postgres з pgvector (for our app) ─────
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: ai_agent
+      POSTGRES_PASSWORD: ai_agent
+      POSTGRES_DB: ai_agent_system
+    ports:
+      - "5433:5432"  # 5433 щоб не конфліктувати з local Postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ai_agent -d ai_agent_system"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ───── Firecrawl stack (per N1 — official self-host setup) ─────
+  firecrawl-api:
+    image: ghcr.io/mendableai/firecrawl:latest
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - HOST=0.0.0.0
+      - USE_DB_AUTHENTICATION=false
+      - BULL_AUTH_KEY=${FIRECRAWL_BULL_KEY:-changeme}
+      - REDIS_URL=redis://firecrawl-redis:6379
+      - PLAYWRIGHT_MICROSERVICE_URL=http://firecrawl-playwright:3000/scrape
+      - BLOCK_MEDIA=true
+    depends_on:
+      - firecrawl-redis
+      - firecrawl-playwright
+      - firecrawl-postgres
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3002/v0/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  firecrawl-playwright:
+    image: ghcr.io/mendableai/playwright-service:latest
+    # ⚠️ RAM-hog: 1.5-2GB. Watch OOM на test server.
+    deploy:
+      resources:
+        limits:
+          memory: 2.5G
+
+  firecrawl-redis:
+    image: redis:7-alpine
+
+  # Окремий Postgres для Firecrawl queue — НЕ pointaty на наш main
+  firecrawl-postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: firecrawl
+      POSTGRES_PASSWORD: ${FIRECRAWL_DB_PASS:-firecrawl}
+      POSTGRES_DB: firecrawl
+    volumes:
+      - firecrawl-pg-data:/var/lib/postgresql/data
+
+  # ───── Optional: pgAdmin для дебагу (commented out by default) ─────
+  # pgadmin:
+  #   image: dpage/pgadmin4:latest
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@local
+  #     PGADMIN_DEFAULT_PASSWORD: admin
+  #   ports:
+  #     - "5050:80"
+
+volumes:
+  postgres-data:
+  firecrawl-pg-data:

@@ -1,0 +1,70 @@
+{
+  "_meta": {
+    "title": "Megan Whitaker — Talkspace (postpartum anxiety)",
+    "industry": "healthcare_consumer",
+    "source_url": "https://www.bezzydepression.com/discover/dep-managing-depression/health-a-therapy-app-helped-me-through-postpartum-anxiety-all-without-leaving-the-house",
+    "why_strong": "Single richest example. Time-anchored trigger (8 p.m. panic attack), competing alternatives compared on price ($200 house calls), spousal push, identity threat ('unfit psychotic mother'), and a strong post-purchase quote about the *mechanic* of why it worked ('typing in the middle of nursing').",
+    "uses_frameworks": ["jtbd_christensen", "health_belief_model", "identity_protective_cognition", "moesta_forces_of_progress"]
+  },
+  "persona": {
+    "name": "New-mom Megan, 32, postpartum anxiety + 1-month-old at home",
+    "role": "primary_buyer",
+    "age_range": "28-38",
+    "location_context": "Suburban first-time mom, 1-month-old daughter recently hospitalized for breathing issues, husband works full-time outside the home, no nearby family",
+    "income_band": "60_100k",
+    "digital_literacy": "high",
+    "primary_job": "When I have a panic attack at 8pm while my husband holds the baby and I can't breathe, I want to talk to a real licensed therapist before midnight — without leaving my newborn in flu season or paying $200 for a house call I can't afford, so I can stop being someone whose anxiety runs the household.",
+    "pain_points": [
+      {
+        "label": "Acute panic attacks since hospital scare",
+        "description": "Daughter's 11-day NICU stay has triggered ongoing intrusive thoughts; first full panic attack happened at 8pm with hyperventilation, dizziness, racing heart",
+        "severity": "critical",
+        "frequency": "frequent",
+        "addressable_by_offer": true
+      },
+      {
+        "label": "Can't physically leave the house",
+        "description": "Nursing every 2 hours; flu-season exposure risk in waiting rooms; baby still on monitoring; can't drive 30 minutes to a therapist's office",
+        "severity": "high",
+        "frequency": "constant",
+        "addressable_by_offer": true
+      },
+      {
+        "label": "$200/session house-call therapist out of budget",
+        "description": "Researched in-home therapy; $200/session × weekly = unsustainable on one income while on maternity leave",
+        "severity": "high",
+        "frequency": "one_time",
+        "addressable_by_offer": true
+      },
+      {
+        "label": "Identity threat: 'unfit mother'",
+        "description": "Terrified that seeking help will be filed somewhere as evidence she can't handle motherhood; hides the panic from her own mother and friends",
+        "severity": "critical",
+        "frequency": "constant",
+        "addressable_by_offer": false
+      }
+    ],
+    "trust_needs": [
+      "Therapists are actually licensed (state-by-state) and credentials are visible",
+      "HIPAA compliance explicit — paranoid that anything goes on insurance EOB",
+      "Asynchronous text option so she doesn't need to schedule fixed time slots",
+      "Clear cancellation — terrified of being 'trapped' in subscription"
+    ],
+    "decision_triggers": [
+      "Husband sat her down after the panic attack and said 'this isn't normal, please get help'",
+      "Insurance not required (would have to deal with her insurance company otherwise)",
+      "Same-day or next-day match with a therapist"
+    ],
+    "objections": [
+      "Will this show up on my insurance EOB and freak my husband's HR out?",
+      "Are these therapists actually qualified for postpartum stuff?",
+      "If I cancel, will it be a fight?"
+    ],
+    "channel_behavior": "Mobile only; nights between feeds; uses Reddit r/postpartumdepression for research; trusts other moms in community more than ads"
+  },
+  "verbatim_quotes": [
+    "Typing out my concerns in the middle of nursing or during nap time became natural and truly therapeutic.",
+    "I just couldn't be the kind of mom who couldn't handle this.",
+    "I wasn't going to leave the baby in a waiting room during flu season."
+  ]
+}

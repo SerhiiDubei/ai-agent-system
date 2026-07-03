@@ -1,0 +1,167 @@
+# Niche → market_segment + frameworks + golden_sets routing
+#
+# When the agent loads, it inspects the brief's niche keyword + free-text
+# brief content + business_constraints to pick which knowledge files to load.
+# This file is the deterministic mapping; an LLM-driven router could replace
+# it later but for v1 deterministic = predictable + cheap.
+#
+# Match logic:
+#   1. Try exact match on niche → use that segment + frameworks + goldens
+#   2. If no exact match, scan keyword_signals against brief text
+#   3. If still no match, default to the catch-all
+# Multiple golden_sets per segment are loaded as few-shot examples.
+
+# ── Niche-specific routing ───────────────────────────────────────────────────
+niches:
+
+  walk_in_tubs:
+    segment: senior_care
+    frameworks_extra: [caregiver_burden, health_belief_model, identity_protective_cognition]
+    golden_sets: [senior_care__paula_kohler_walkin, senior_care__melanie_aplaceformom]
+
+  mobility_aids:
+    segment: senior_care
+    frameworks_extra: [caregiver_burden, health_belief_model]
+    golden_sets: [senior_care__paula_kohler_walkin, senior_care__melanie_aplaceformom]
+
+  hearing_aids:
+    segment: senior_care
+    frameworks_extra: [identity_protective_cognition, health_belief_model]
+    golden_sets: [senior_care__paula_kohler_walkin]
+
+  medicare_advisory:
+    segment: senior_care
+    frameworks_extra: [caregiver_burden, health_belief_model]
+    golden_sets: [senior_care__melanie_aplaceformom]
+
+  senior_living:
+    segment: senior_care
+    frameworks_extra: [caregiver_burden, identity_protective_cognition]
+    golden_sets: [senior_care__melanie_aplaceformom]
+
+  debt_relief:
+    segment: financial_services
+    frameworks_extra: [identity_protective_cognition, moesta_forces_of_progress]
+    golden_sets: [financial_services__mary_national_debt]
+
+  credit_repair:
+    segment: financial_services
+    frameworks_extra: [identity_protective_cognition]
+    golden_sets: [financial_services__mary_national_debt]
+
+  insurance_life:
+    segment: financial_services
+    frameworks_extra: [health_belief_model]
+    golden_sets: [financial_services__mary_national_debt]
+
+  saas_workflow:
+    segment: b2b_saas
+    frameworks_extra: [moesta_forces_of_progress, klement_jobs_as_progress]
+    golden_sets: [b2b_saas__chintan_linear]
+
+  saas_dev_tools:
+    segment: b2b_saas
+    frameworks_extra: [moesta_forces_of_progress, identity_protective_cognition]
+    golden_sets: [b2b_saas__chintan_linear]
+
+  saas_security:
+    segment: b2b_saas
+    frameworks_extra: [moesta_forces_of_progress, health_belief_model]
+    golden_sets: [b2b_saas__chintan_linear]
+
+  supplements:
+    segment: dtc_ecom
+    frameworks_extra: [klement_jobs_as_progress, identity_protective_cognition]
+    golden_sets: [dtc_ecom__careof_traveler]
+
+  beauty:
+    segment: dtc_ecom
+    frameworks_extra: [klement_jobs_as_progress, identity_protective_cognition]
+    golden_sets: [dtc_ecom__careof_traveler]
+
+  wellness:
+    segment: dtc_ecom
+    frameworks_extra: [klement_jobs_as_progress]
+    golden_sets: [dtc_ecom__careof_traveler]
+
+  telehealth_mental_health:
+    segment: healthcare_consumer
+    frameworks_extra: [health_belief_model, identity_protective_cognition]
+    golden_sets: [healthcare__megan_talkspace]
+
+  telehealth_general:
+    segment: healthcare_consumer
+    frameworks_extra: [health_belief_model]
+    golden_sets: [healthcare__megan_talkspace]
+
+# ── Keyword fallback (when niche key not found, scan brief for these) ────────
+keyword_signals:
+  senior_care:
+    - "walk-in tub"
+    - "walk in tub"
+    - "walk_in"
+    - "stairlift"
+    - "hearing aid"
+    - "Medicare"
+    - "65+"
+    - "seniors"
+    - "elderly"
+    - "aging in place"
+    - "aging-in-place"
+    - "in-home care"
+    - "fall detection"
+    - "mobility aid"
+    - "assisted living"
+  financial_services:
+    - "debt relief"
+    - "credit repair"
+    - "credit card debt"
+    - "consolidat"
+    - "loan"
+    - "lending"
+    - "BNPL"
+    - "insurance"
+    - "tax"
+  b2b_saas:
+    - "B2B"
+    - "SaaS"
+    - "workflow"
+    - "CRM"
+    - "dev tool"
+    - "developer"
+    - "devops"
+    - "engineering team"
+    - "subscription software"
+    - "enterprise"
+  dtc_ecom:
+    - "DTC"
+    - "subscription"
+    - "supplement"
+    - "vitamin"
+    - "wellness"
+    - "beauty"
+    - "skincare"
+    - "ecommerce"
+  healthcare_consumer:
+    - "telehealth"
+    - "therapy"
+    - "mental health"
+    - "telemed"
+    - "health tracking"
+    - "symptom"
+    - "anxiety"
+    - "depression"
+
+# ── Default frameworks (always loaded regardless of niche) ───────────────────
+default_frameworks:
+  - jtbd_christensen
+  - schwartz_awareness_stages
+  - sharp_romaniuk_ceps
+  - maslow_pain_mapping
+  - mom_test
+
+# ── Catch-all (when no segment matches) ──────────────────────────────────────
+catch_all:
+  segment: null    # don't load any segment file
+  frameworks_extra: []
+  golden_sets: [b2b_saas__chintan_linear, dtc_ecom__careof_traveler]   # diverse pair

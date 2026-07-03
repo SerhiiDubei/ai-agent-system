@@ -1,0 +1,73 @@
+{
+  "_meta": {
+    "title": "Decision package: 7-day campaign window forces basic-only program",
+    "archetype": "E — Constrained time window",
+    "why_strong_example": "Demonstrates time-constraint discipline. 5 plans → 1 ship + 3 defer-to-next-window + 1 kill. Strategic recommendation explicitly tells operator to pre-commit traffic for the deferred big tests."
+  },
+  "input_summary": {
+    "monthly_traffic": 30000,
+    "baseline_conversion_pct": 8.5,
+    "time_window_days": 7,
+    "expected_lift_floor_pct": 8.0,
+    "risk_appetite": "balanced",
+    "prior_tests_tried": [],
+    "page_works_summary": "baseline=partial (8.5% feels low for the niche); preservation_zones modest (page is not yet deeply optimized). Most levers in the 3-4 range.",
+    "hg_plans_count": 5
+  },
+  "decision": {
+    "shipped_plans": [
+      {
+        "test_id": "T1-cta-copy-specificity",
+        "ship_order": 1,
+        "parallel_group": null,
+        "final_sample_size_per_arm": 3500,
+        "final_duration_days": 7,
+        "why_this_first": "Basic test: replace generic 'Submit' CTA with specific value-prop CTA ('Get My Free Quote'). Page-Works flagged generic CTA as change-safe. Sample size 3500/arm at 8.5% baseline detects ~10% lift — within window. Highest-confidence basic test for short window."
+      }
+    ],
+    "iterate_plans": [
+      {
+        "test_id": "T2-hero-headline-rewrite",
+        "blocker": "Sample size insufficient for window — needs 15,000/arm to detect claimed 6% lift; only 3,500/arm available in 7 days.",
+        "what_to_fix": [
+          "Defer to next month when 14-21 day window is available",
+          "Or refocus variant to test a more aggressive headline change with detectable lift floor of 12%+"
+        ],
+        "suggested_owner": "human_operator"
+      },
+      {
+        "test_id": "T3-form-field-reorder",
+        "blocker": "Sample size insufficient — needs 12,000/arm to detect 7% lift.",
+        "what_to_fix": [
+          "Defer to next 21-day window",
+          "Or scope smaller (test ONE field re-order, not full reorder)"
+        ],
+        "suggested_owner": "human_operator"
+      },
+      {
+        "test_id": "T4-trust-badge-addition",
+        "blocker": "Sample size adequate but interaction effect with T1 (both above-fold elements). Cannot run parallel with T1; would need a separate window.",
+        "what_to_fix": [
+          "Run after T1 completes (sequential in next 7-day window)",
+          "Or test trust badge in a different page section to avoid interaction effect"
+        ],
+        "suggested_owner": "hypothesis_generator"
+      }
+    ],
+    "killed_plans": [
+      {
+        "test_id": "T5-fundamental-redesign-paradigm-shift",
+        "kill_reason": "Super test (paradigm shift from lead-form to quiz funnel) requires 25k+/arm to detect direction-change lifts; impossible in 7-day window with 30k traffic. Even if executed, would need 2-3 week measurement period. Wrong tool for this window.",
+        "kill_category": "infeasible_time"
+      }
+    ],
+    "strategic_recommendation": "7-day window forces conservative testing — only 1 basic test can fit. Ship T1 (CTA specificity) this week. CRITICALLY: pre-commit operator's next 21-day window for T2 (hero rewrite) — it's the highest-leverage deferred test and the page is not deeply optimized yet, so the win potential is real. Do NOT skip the rewrite just because it doesn't fit this campaign.",
+    "constraint_warnings": [
+      "7-day window is the binding constraint — 4 of 5 plans defer or kill not for quality reasons but for math.",
+      "operator should plan a next-month testing block (3 weeks minimum) to harvest the deferred queue."
+    ],
+    "expert_conflicts_resolved": [],
+    "next_batch_focus": "Next 21-day window: T2 (hero rewrite) as primary big-rock test + T3 (form reorder) as parallel-safe basic. T4 (trust badge) deferred until T1's CTA change is measured to avoid above-fold interaction.",
+    "confidence": 0.85
+  }
+}

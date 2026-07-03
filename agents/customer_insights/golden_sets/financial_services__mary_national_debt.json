@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "title": "Mary — National Debt Relief",
+    "industry": "financial_services",
+    "source_url": "https://www.nationaldebtrelief.com/",
+    "why_strong": "Hard numbers ($22.8K, $1,020/mo) anchor the persona; emotional JTBD ('get my life back') explicit; demonstrates the 'pay someone to take this off my plate' buying mode that drives debt-relief conversion.",
+    "uses_frameworks": ["jtbd_christensen", "moesta_forces_of_progress", "identity_protective_cognition", "health_belief_model"]
+  },
+  "persona": {
+    "name": "Stretched-middle Mary, 42, $22K underwater after divorce",
+    "role": "primary_buyer",
+    "age_range": "35-50",
+    "location_context": "Mid-size US city, recently divorced, two kids in school, working full-time at $52k/yr, lives in apartment after the house was sold",
+    "income_band": "30_60k",
+    "digital_literacy": "high",
+    "primary_job": "When my minimum credit card payments hit $1,020/month and I'm cutting groceries to pay them, I want to hand this whole mess to a professional who'll deal with the creditors for me, so I can stop opening mail with my heart pounding and get my life back within 2-4 years.",
+    "pain_points": [
+      {
+        "label": "Monthly minimums are unsustainable",
+        "description": "$1,020/mo across 5 cards + 1 personal loan; eats 25% of take-home; can't save for car repair or kids' activities",
+        "severity": "critical",
+        "frequency": "constant",
+        "addressable_by_offer": true
+      },
+      {
+        "label": "Shame keeps her isolated",
+        "description": "Hasn't told her sister or her best friend; declines invitations to lunch she can't afford; lies about why",
+        "severity": "high",
+        "frequency": "frequent",
+        "addressable_by_offer": false
+      },
+      {
+        "label": "Doesn't know how to negotiate herself",
+        "description": "Tried calling Discover once; got transferred 3 times; hung up in tears; doesn't trust herself to handle 5 different creditors",
+        "severity": "high",
+        "frequency": "one_time",
+        "addressable_by_offer": true
+      },
+      {
+        "label": "Fear of 'sketchy' debt-relief outfits",
+        "description": "A coworker mentioned a debt-relief company that took her money and ghosted; Mary is hyper-cautious of being scammed in this state",
+        "severity": "high",
+        "frequency": "constant",
+        "addressable_by_offer": true
+      }
+    ],
+    "trust_needs": [
+      "BBB A+ rating prominently displayed",
+      "AFCC / IAPDA accreditation badge",
+      "'No upfront fees' stated explicitly (FTC-regulated, but most don't advertise it)",
+      "Real customer stories with first names + amounts saved + photos",
+      "Years in business clearly visible"
+    ],
+    "decision_triggers": [
+      "A collections call came in to her work phone last Tuesday — she nearly threw up",
+      "Free consultation with no commitment (and no credit pull)",
+      "Specific monthly payment shown ('You'd pay $X/mo instead of $1,020')"
+    ],
+    "objections": [
+      "Will this destroy my credit score even more?",
+      "How do I know you're not the scam company?",
+      "What if my creditors sue me before you negotiate?"
+    ],
+    "channel_behavior": "Mobile primarily, late evening after kids in bed; Google search high-intent ('settle credit card debt without lawsuit'); will read Reddit threads about specific company; checks BBB before submitting any form"
+  },
+  "verbatim_quotes": [
+    "I just want my life back.",
+    "I can't keep doing this — opening the mail makes me feel sick.",
+    "I tried calling them myself and I just couldn't."
+  ]
+}
